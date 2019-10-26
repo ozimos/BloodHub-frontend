@@ -117,7 +117,6 @@ export default function SignUp() {
   const handleAlignment = (event, newAlignment) => {
     setIsDonor(newAlignment);
   };
-console.log(isDonor)
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
