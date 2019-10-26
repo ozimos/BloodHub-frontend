@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { StylesProvider } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
@@ -15,7 +16,9 @@ const store = createStore( reducers, composeEnhancers( applyMiddleware( thunk ) 
 
 const jsx = (
   <Provider store={store}>
+    <StylesProvider injectFirst>
     <App />
+    </StylesProvider>
   </Provider>
 );
 
