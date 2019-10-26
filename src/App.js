@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import logo from './logo.svg';
+import SignInSide from './components/SignInSide'
 import SignUp from './components/SignUp'
 import './App.css';
 
@@ -39,13 +40,19 @@ function App() {
               <Link to="/home">Home</Link>
             </li>
             <li>
-              <Link to="/signup">SignUp</Link>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/signin">Sign In</Link>
             </li>
           </ul>
         </nav>
         <Switch>
           <Route path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/signin">
+            <SignInSide />
           </Route>
           <Route path="/">
             <Home />
