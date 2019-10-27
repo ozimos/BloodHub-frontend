@@ -14,6 +14,7 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import {Switch, Route, useRouteMatch, useParams} from 'react-router-dom';
 import Copyright from './Copyright'
 import RouterLink from './RouterLink'
+import Navbar from './Navbar'
 
 function DonorFields() {
   return (
@@ -100,7 +101,6 @@ function SignUpForm({extra}) {
   if (signup === 'donor') {
     initialDonorState = true
   }
-  console.log(signup)
 
   const [isDonor, setIsDonor] = useState(initialDonorState);
 
@@ -214,8 +214,10 @@ export default function SignUp() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <CssBaseline />
+      <Navbar />
+    <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -234,6 +236,7 @@ export default function SignUp() {
       <Box mt={5}>
         <Copyright />
       </Box>
+    </Container>
     </Container>
   );
 }
