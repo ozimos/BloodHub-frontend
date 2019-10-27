@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, useCallback, Fragment } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
+import axios from 'axios'
 import Copyright from './Copyright'
 import RouterLink from './RouterLink'
 import Navbar from './Navbar'
@@ -154,18 +155,6 @@ function SignUpForm ( { extra } ) {
               variant="outlined"
               required
               fullWidth
-              id="phone"
-              label="Phone"
-              type="tel"
-              name="phone"
-              autoComplete="phone"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
               id="email"
               label="Email Address"
               type="email"
@@ -174,18 +163,6 @@ function SignUpForm ( { extra } ) {
             />
           </Grid>
           {isDonor && <DonorFields />}
-          <Grid item xs={12}>
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="password"
-              type="password"
-              label="password"
-              name="email"
-              autoComplete="email"
-            />
-          </Grid>
         </Grid>
         <Button
           type="submit"
