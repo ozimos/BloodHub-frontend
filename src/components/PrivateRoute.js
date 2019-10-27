@@ -2,10 +2,10 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import auth from '../utils/auth'
 
-export default  ({ component: Component, ...rest }) => (
+export default  ({ children, ...rest }) => (
     <Route {...rest} render={props => (
         auth.getUserToken()
-            ? <Component {...props} />
+            ? children
             : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
     )} />
 )
