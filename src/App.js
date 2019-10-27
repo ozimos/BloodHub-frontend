@@ -1,36 +1,31 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import SignInSide from './components/SignInSide'
-import SignUp from './components/SignUp'
-import Home from './components/Home'
-import RequestBlood from './components/RequestBlood'
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SignInSide from "./components/SignInSide";
+import SignUp from "./components/SignUp";
+import Home from "./components/Home";
+import RequestBlood from "./components/RequestBlood";
+import PrivateRoute from "./components/PrivateRoute";
+import "./App.css";
 
-
-
-function App () {
+function App() {
   return (
     <Router>
-        <Switch>
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-          <Route path="/signin">
-            <SignInSide />
-          </Route>
-          <Route path="/request">
+      <Switch>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/signin">
+          <SignInSide />
+        </Route>
+        <PrivateRoute path="/request">
             <RequestBlood />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+        </PrivateRoute>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
     </Router>
   );
-};
+}
 
 export default App;
