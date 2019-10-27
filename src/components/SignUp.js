@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react';
+import React, { useState, Fragment } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,205 +11,205 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import {Switch, Route, useRouteMatch, useParams} from 'react-router-dom';
+import { Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
 import Copyright from './Copyright'
 import RouterLink from './RouterLink'
 import Navbar from './Navbar'
 
-function DonorFields() {
+function DonorFields () {
   return (
     <Fragment>
-        <Grid item xs={12}>
-            <TextField
-            variant="outlined"
-            required
-            fullWidth
-            name="blood-group"
-            label="Blood Group"
-            type="string"
-            id="blood-group"
-            autoComplete="blood-group"
-            />
-        </Grid>
-        <Grid item xs={12}>
-            <TextField
-            variant="outlined"
-            required
-            fullWidth
-            name="street"
-            label="Street Address"
-            type="string"
-            id="street-address"
-            autoComplete="street-address"
-            />
-        </Grid>
-        <Grid item xs={12}>
-            <TextField
-            variant="outlined"
-            required
-            fullWidth
-            name="lga"
-            label="LGA"
-            id="lga"
-            autoComplete="lga"
-            />
-        </Grid>
-        <Grid item xs={12}>
-            <TextField
-            variant="outlined"
-            required
-            fullWidth
-            name="state"
-            label="State"
-            id="state"
-            autoComplete="state"
-            />
-        </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          name="blood-group"
+          label="Blood Group"
+          type="string"
+          id="blood-group"
+          autoComplete="blood-group"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          name="street"
+          label="Street Address"
+          type="string"
+          id="street-address"
+          autoComplete="street-address"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          name="lga"
+          label="LGA"
+          id="lga"
+          autoComplete="lga"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          name="state"
+          label="State"
+          id="state"
+          autoComplete="state"
+        />
+      </Grid>
     </Fragment>
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles( theme => ( {
   '@global': {
     body: {
       backgroundColor: theme.palette.common.white,
     },
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing( 8 ),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: theme.spacing( 1 ),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing( 3 ),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing( 3, 0, 2 ),
   },
-}));
+} ) );
 
-function SignUpForm({extra}) {
+function SignUpForm ( { extra } ) {
   const classes = useStyles();
-  let {signup} = useParams();
+  let { signup } = useParams();
   let initialDonorState
-  if (signup === 'donor') {
+  if ( signup === 'donor' ) {
     initialDonorState = true
   }
 
-  const [isDonor, setIsDonor] = useState(initialDonorState);
+  const [isDonor, setIsDonor] = useState( initialDonorState );
 
-  const handleAlignment = (event, newAlignment) => {
-    setIsDonor(newAlignment);
+  const handleAlignment = ( event, newAlignment ) => {
+    setIsDonor( newAlignment );
   };
 
-return (
-  <Fragment>
+  return (
+    <Fragment>
 
-  <ToggleButtonGroup
-            value={isDonor}
-            exclusive
-            onChange={handleAlignment}
-            aria-label="is a donor"
-          >
-            <ToggleButton value={true} aria-label="left aligned">
-            Register as a Donor
+      <ToggleButtonGroup
+        value={isDonor}
+        exclusive
+        onChange={handleAlignment}
+        aria-label="is a donor"
+      >
+        <ToggleButton value={true} aria-label="left aligned">
+          Register as a Donor
             </ToggleButton>
-            <ToggleButton value={false} aria-label="centered">
-            Request a Blood Donation
+        <ToggleButton value={false} aria-label="centered">
+          Request a Blood Donation
             </ToggleButton>
-        </ToggleButtonGroup>
-  <form className={classes.form} noValidate>
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm={6}>
-        <TextField
-          autoComplete="fname"
-          name="firstName"
-          variant="outlined"
-          required
+      </ToggleButtonGroup>
+      <form className={classes.form} noValidate>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              autoComplete="fname"
+              name="firstName"
+              variant="outlined"
+              required
+              fullWidth
+              id="firstName"
+              label="First Name"
+              autoFocus
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="lastName"
+              label="Last Name"
+              name="lastName"
+              autoComplete="lname"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="phone"
+              label="Phone"
+              type="tel"
+              name="phone"
+              autoComplete="phone"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              type="email"
+              name="email"
+              autoComplete="email"
+            />
+          </Grid>
+          {isDonor && <DonorFields />}
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="password"
+              type="password"
+              label="password"
+              name="email"
+              autoComplete="email"
+            />
+          </Grid>
+        </Grid>
+        <Button
+          type="submit"
           fullWidth
-          id="firstName"
-          label="First Name"
-          autoFocus
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <TextField
-          variant="outlined"
-          required
-          fullWidth
-          id="lastName"
-          label="Last Name"
-          name="lastName"
-          autoComplete="lname"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <TextField
-          variant="outlined"
-          required
-          fullWidth
-          id="phone"
-          label="Phone"
-          type="tel"
-          name="phone"
-          autoComplete="phone"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <TextField
-          variant="outlined"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          type="email"
-          name="email"
-          autoComplete="email"
-        />
-      </Grid>
-      {isDonor && <DonorFields />}
-      <Grid item xs={12}>
-        <TextField
-          variant="outlined"
-          required
-          fullWidth
-          id="password"
-          type="password"
-          label="password"
-          name="email"
-          autoComplete="email"
-        />
-      </Grid>
-    </Grid>
-    <Button
-      type="submit"
-      fullWidth
-      variant="contained"
-      color="primary"
-      className={classes.submit}
-    >
-      Proceed
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Proceed
     </Button>
-    <Grid container justify="flex-end">
-      <Grid item>
-        <Link component={RouterLink} to="/signin" variant="body2">
-          Already have an account? Sign in
+        <Grid container justify="flex-end">
+          <Grid item>
+            <Link to="/signin" component={RouterLink} variant="body2">
+              Already have an account? Sign in
         </Link>
-      </Grid>
-    </Grid>
-  </form>
-  </Fragment>
+          </Grid>
+        </Grid>
+      </form>
+    </Fragment>
   )
 }
 
 
-export default function SignUp() {
+export default function SignUp () {
   let { path } = useRouteMatch();
   const classes = useStyles();
 
@@ -217,26 +217,22 @@ export default function SignUp() {
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <Navbar />
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Switch>
+            <Route path={`${ path }/:signup`}>
+              <SignUpForm />
+            </Route>
+          </Switch>
 
-        
-
-
-        <Switch>
-        <Route path={`${path}/:signup`}>
-          <SignUpForm />
-        </Route>
-      </Switch>
-
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
+        </div>
+        <Box mt={5}>
+          <Copyright />
+        </Box>
+      </Container>
     </Container>
   );
 }
