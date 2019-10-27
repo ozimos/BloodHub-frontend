@@ -7,6 +7,7 @@ import {
 import SignInSide from './components/SignInSide'
 import SignUp from './components/SignUp'
 import Home from './components/Home'
+import RequestBlood from './components/RequestBlood'
 import './App.css';
 
 
@@ -20,6 +21,9 @@ function App () {
           </Route>
           <Route path="/signin">
             <SignInSide />
+          </Route>
+          <Route path="/request">
+            <RequestBlood />
           </Route>
           <Route path="/">
             <Home />
