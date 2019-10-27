@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Copyright from './Copyright'
+import RouterLink from './RouterLink'
+import Navbar from './Navbar'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,6 +52,7 @@ export default function SignInSide() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
+      <Navbar />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
@@ -57,7 +60,7 @@ export default function SignInSide() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign In
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -97,7 +100,7 @@ export default function SignInSide() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link component={RouterLink} to="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
