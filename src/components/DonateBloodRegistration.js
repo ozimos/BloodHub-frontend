@@ -45,7 +45,7 @@ export default function DonateBloodRegistration() {
           </Avatar>
           <Switch>
             <Route path="/donate-blood-signup">
-            <PartialForm action={signup} component={DonorFields} />
+            <PartialForm action={signup} component={DonorFields} redirectPath="/dashboard"/>
             </Route>
           </Switch>
         </div>

@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import RouterLink from "../RouterLink";
 import Grid from "@material-ui/core/Grid";
+import {Redirect} from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function PartialForm({component: Component, dispatch, action}) {
+function PartialForm({component: Component, dispatch, action, redirectPath, isLoggedIn}) {
 
   const classes = useStyles();
 
@@ -39,6 +40,7 @@ function PartialForm({component: Component, dispatch, action}) {
   };
 
   return (
+    isLoggedIn ? <Redirect to={redirectPath} /> :
     <Fragment>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -80,7 +82,7 @@ function PartialForm({component: Component, dispatch, action}) {
               onChange={handleChange}
             />
           </Grid>
-          {Component && <Component />}
+          {Component && <Component handleChange={handleChange}/>}
         </Grid>
         <Button
           type="submit"

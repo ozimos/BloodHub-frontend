@@ -26,7 +26,7 @@ function App() {
         <Route path="/signin">
           <SignInSide />
         </Route>
-        <PrivateRoute path="/request">
+        <PrivateRoute path="/blood-details">
             <RequestBlood />
         </PrivateRoute>
         <PrivateRoute path="/dashboard">

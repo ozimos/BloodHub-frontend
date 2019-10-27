@@ -64,3 +64,19 @@ export const requestBlood = formData => async ( dispatch ) => {
     return message;
   }
 };
+export const completeBloodRequest = formData => async ( dispatch ) => {
+  try {
+    const { data } = await axios.post( '/requester', formData );
+    authUtils.saveUserToken( data.token );
+    dispatch( { type: AUTHENTICATE_USER, payload: data } );
+    await getCurrentLoggedInUser()( dispatch );
+    return null;
+  } catch ( {
+    response: {
+      data: { message },
+    },
+  } ) {
+    dispatch( { type: AUTHENTICATE_USER } );
+    return message;
+  }
+};

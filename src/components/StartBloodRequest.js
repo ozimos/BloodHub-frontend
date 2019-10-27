@@ -44,7 +44,7 @@ export default function StartBloodRequest() {
           </Avatar>
           <Switch>
             <Route path="/request-blood">
-            <PartialForm action={requestBlood} />
+            <PartialForm action={requestBlood} redirectPath="/blood-details"/>
             </Route>
           </Switch>
         </div>

@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 
-export default function DonorFields() {
+export default function DonorFields({handleChange}) {
     return (
       <Fragment>
         <Grid item xs={12}>
@@ -12,7 +12,8 @@ export default function DonorFields() {
             required
             fullWidth
             name="blood-group"
-            label="Blood Group"
+              onChange={handleChange}
+              label="Blood Group"
             type="string"
             id="blood-group"
             autoComplete="blood-group"
@@ -24,7 +25,8 @@ export default function DonorFields() {
             required
             fullWidth
             name="street"
-            label="Street Address"
+              onChange={handleChange}
+              label="Street Address"
             type="string"
             id="street-address"
             autoComplete="street-address"
@@ -36,7 +38,8 @@ export default function DonorFields() {
             required
             fullWidth
             name="lga"
-            label="LGA"
+              onChange={handleChange}
+              label="LGA"
             id="lga"
             autoComplete="lga"
           />
@@ -48,7 +51,8 @@ export default function DonorFields() {
             fullWidth
             name="state"
             label="State"
-            id="state"
+              onChange={handleChange}
+              id="state"
             autoComplete="state"
           />
         </Grid>
