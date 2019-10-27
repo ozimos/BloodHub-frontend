@@ -14,6 +14,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link as ReactLink } from "react-router-dom";
 import Copyright from "./Copyright";
 import RouterLink from "./RouterLink";
 import Navbar from "./Navbar";
@@ -51,10 +52,7 @@ const useStyles = makeStyles(theme => ({
 function SignInSide(isLoggedIn, user) {
   const classes = useStyles();
 
-  const getRedirectPath = user => (user.isDonor ? "request" : "dashboard");
-  return isLoggedIn ? (
-    <Redirect to={getRedirectPath(user)} />
-  ) : (
+  return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Navbar />
@@ -105,9 +103,9 @@ function SignInSide(isLoggedIn, user) {
             </Button>
             <Grid container>
               <Grid item>
-                <Link component={RouterLink} to="/signup" variant="body2">
+                <ReactLink to="/donate-blood-signup" >
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </ReactLink>
               </Grid>
             </Grid>
             <Box mt={5}>

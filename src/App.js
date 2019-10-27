@@ -20,9 +20,6 @@ function App() {
         <Route path="/request-blood">
           <StartBloodRequest />
         </Route>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
         <Route path="/signin">
           <SignInSide />
         </Route>

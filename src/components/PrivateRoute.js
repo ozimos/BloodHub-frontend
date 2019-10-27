@@ -6,6 +6,6 @@ export default  ({ children, ...rest }) => (
     <Route {...rest} render={props => (
         auth.getUserToken()
             ? children
-            : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+            : <Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
     )} />
 )
