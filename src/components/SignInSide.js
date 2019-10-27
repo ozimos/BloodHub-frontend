@@ -16,7 +16,7 @@ import Copyright from './Copyright'
 import RouterLink from './RouterLink'
 import Navbar from './Navbar'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles( theme => ( {
   root: {
     height: '100vh',
   },
@@ -28,25 +28,25 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: 'center',
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    margin: theme.spacing( 8, 4 ),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: theme.spacing( 1 ),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing( 1 ),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing( 3, 0, 2 ),
   },
-}));
+} ) );
 
-export default function SignInSide() {
+export default function SignInSide () {
   const classes = useStyles();
 
   return (
