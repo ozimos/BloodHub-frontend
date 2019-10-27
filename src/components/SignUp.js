@@ -1,23 +1,24 @@
-import React, { useState, useEffect, useCallback, Fragment } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import { Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
-import axios from 'axios'
-import Copyright from './Copyright'
-import RouterLink from './RouterLink'
-import Navbar from './Navbar'
+import React, { useState, Fragment } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
+import Copyright from "./Copyright";
+import RouterLink from "./RouterLink";
+import Navbar from "./Navbar";
+import { login } from "../actions/auth";
+import { connect } from "react-redux";
 
-function DonorFields () {
+function DonorFields() {
   return (
     <Fragment>
       <Grid item xs={12}>
@@ -70,48 +71,61 @@ function DonorFields () {
   );
 }
 
-const useStyles = makeStyles( theme => ( {
-  '@global': {
+const useStyles = makeStyles(theme => ({
+  "@global": {
     body: {
-      backgroundColor: theme.palette.common.white,
-    },
+      backgroundColor: theme.palette.common.white
+    }
   },
   paper: {
-    marginTop: theme.spacing( 8 ),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
-    margin: theme.spacing( 1 ),
-    backgroundColor: theme.palette.secondary.main,
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing( 3 ),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing( 3, 0, 2 ),
-  },
-} ) );
+    margin: theme.spacing(3, 0, 2)
+  }
+}));
 
-function SignUpForm ( { extra } ) {
+function SignUpForm({ extra, dispatch }) {
   const classes = useStyles();
   let { signup } = useParams();
-  let initialDonorState
-  if ( signup === 'donor' ) {
-    initialDonorState = true
+  let initialDonorState;
+  if (signup === "donor") {
+    initialDonorState = true;
   }
 
-  const [isDonor, setIsDonor] = useState( initialDonorState );
+  const [isDonor, setIsDonor] = useState(initialDonorState);
+  const [formData, setFormData] = useState({});
 
-  const handleAlignment = ( event, newAlignment ) => {
-    setIsDonor( newAlignment );
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setFormData(state => ({ ...state, [name]: value }));
+  };
+  const handleAlignment = (event, newAlignment) => {
+    setIsDonor(newAlignment);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const { dispatch } = this.props;
+    if (formData.firstName && formData.lastName && formData.email ) {
+      dispatch(login(formData));
+    }
   };
 
   return (
     <Fragment>
-
       <ToggleButtonGroup
         value={isDonor}
         exclusive
@@ -120,12 +134,12 @@ function SignUpForm ( { extra } ) {
       >
         <ToggleButton value={true} aria-label="left aligned">
           Register as a Donor
-            </ToggleButton>
+        </ToggleButton>
         <ToggleButton value={false} aria-label="centered">
           Request a Blood Donation
-            </ToggleButton>
+        </ToggleButton>
       </ToggleButtonGroup>
-      <form className={classes.form} noValidate>
+      <form className={classes.form} noValidate onSubmit={handleSubmit} > 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -137,6 +151,7 @@ function SignUpForm ( { extra } ) {
               id="firstName"
               label="First Name"
               autoFocus
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -148,6 +163,7 @@ function SignUpForm ( { extra } ) {
               label="Last Name"
               name="lastName"
               autoComplete="lname"
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -160,6 +176,7 @@ function SignUpForm ( { extra } ) {
               type="email"
               name="email"
               autoComplete="email"
+              onChange={handleChange}
             />
           </Grid>
           {isDonor && <DonorFields />}
@@ -172,21 +189,20 @@ function SignUpForm ( { extra } ) {
           className={classes.submit}
         >
           Proceed
-    </Button>
+        </Button>
         <Grid container justify="flex-end">
           <Grid item>
             <Link to="/signin" component={RouterLink} variant="body2">
               Already have an account? Sign in
-        </Link>
+            </Link>
           </Grid>
         </Grid>
       </form>
     </Fragment>
-  )
+  );
 }
 
-
-export default function SignUp () {
+export function SignUp() {
   let { path } = useRouteMatch();
   const classes = useStyles();
 
@@ -200,11 +216,10 @@ export default function SignUp () {
             <LockOutlinedIcon />
           </Avatar>
           <Switch>
-            <Route path={`${ path }/:signup`}>
+            <Route path={`${path}/:signup`}>
               <SignUpForm />
             </Route>
           </Switch>
-
         </div>
         <Box mt={5}>
           <Copyright />
@@ -213,3 +228,5 @@ export default function SignUp () {
     </Container>
   );
 }
+
+export default connect()(SignUp);
