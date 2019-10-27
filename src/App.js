@@ -4,6 +4,7 @@ import SignInSide from "./components/SignInSide";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import RequestBlood from "./components/RequestBlood";
+import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <PrivateRoute path="/request">
             <RequestBlood />
+        </PrivateRoute>
+        <PrivateRoute path="/dashboard">
+            <Dashboard />
         </PrivateRoute>
         <Route path="/">
           <Home />

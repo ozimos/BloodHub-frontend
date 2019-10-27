@@ -11,12 +11,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
+import { Switch, Route, useRouteMatch, useParams, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 import Copyright from "./Copyright";
 import RouterLink from "./RouterLink";
 import Navbar from "./Navbar";
 import { login } from "../actions/auth";
-import { connect } from "react-redux";
 
 function DonorFields() {
   return (
@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SignUpForm({ extra, dispatch }) {
+function SignUpForm({ dispatch, isLoggedIn }) {
   const classes = useStyles();
   let { signup } = useParams();
   let initialDonorState;
@@ -118,13 +118,16 @@ function SignUpForm({ extra, dispatch }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const { dispatch } = this.props;
     if (formData.firstName && formData.lastName && formData.email ) {
       dispatch(login(formData));
     }
   };
 
+  const getRedirectPath = (isDonor) => isDonor ? '/request' : '/dashboard';
+  
+
   return (
+    isLoggedIn ? <Redirect to={getRedirectPath(isDonor)} /> :
     <Fragment>
       <ToggleButtonGroup
         value={isDonor}
@@ -202,12 +205,17 @@ function SignUpForm({ extra, dispatch }) {
   );
 }
 
-export function SignUp() {
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn
+})
+
+const ConnectedSignUpForm = connect(mapStateToProps)(SignUpForm);
+
+export default function SignUp() {
   let { path } = useRouteMatch();
   const classes = useStyles();
 
-  return (
-    <Container component="main" maxWidth="sm">
+  return (<Container component="main" maxWidth="sm">
       <CssBaseline />
       <Navbar />
       <Container component="main" maxWidth="xs">
@@ -217,7 +225,7 @@ export function SignUp() {
           </Avatar>
           <Switch>
             <Route path={`${path}/:signup`}>
-              <SignUpForm />
+              <ConnectedSignUpForm />
             </Route>
           </Switch>
         </div>
@@ -229,4 +237,3 @@ export function SignUp() {
   );
 }
 
-export default connect()(SignUp);
