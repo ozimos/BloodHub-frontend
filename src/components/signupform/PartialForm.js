@@ -8,8 +8,6 @@ import Grid from "@material-ui/core/Grid";
 import { Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { Link as ReactLink } from "react-router-dom";
-
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -20,7 +18,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   }
 }));
-
 
 function PartialForm({
   component: Component,
@@ -103,9 +100,9 @@ function PartialForm({
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
-            <ReactLink to="/signin">
+            <Link component={RouterLink} to="signin" variant="body2">
               Already have an account? Sign in
-            </ReactLink>
+            </Link>
           </Grid>
         </Grid>
       </form>
