@@ -16,8 +16,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as ReactLink } from "react-router-dom";
 import Copyright from "./Copyright";
-import RouterLink from "./RouterLink";
 import Navbar from "./Navbar";
+import RouterLink from "./RouterLink";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,10 +49,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SignInSide(isLoggedIn, user) {
+
+function SignInSide({isLoggedIn, user}) {
   const classes = useStyles();
 
-  return (
+  const redirectPath = (user && user.isDonor) ? "/request" : "/dashboard";
+  return isLoggedIn ? (
+    <Redirect to={redirectPath} />
+  ) : (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Navbar />
@@ -103,9 +107,9 @@ function SignInSide(isLoggedIn, user) {
             </Button>
             <Grid container>
               <Grid item>
-                <ReactLink to="/donate-blood-signup" >
+                <Link component={RouterLink} to="/donate-blood-signup" variant="body2">
                   {"Don't have an account? Sign Up"}
-                </ReactLink>
+                </Link>
               </Grid>
             </Grid>
             <Box mt={5}>
@@ -119,7 +123,8 @@ function SignInSide(isLoggedIn, user) {
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn
+  isLoggedIn: state.auth.isLoggedIn,
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps)(SignInSide);

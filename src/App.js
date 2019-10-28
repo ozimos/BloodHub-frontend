@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignInSide from "./components/SignInSide";
-import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import RequestBlood from "./components/RequestBlood";
 import Dashboard from "./components/Dashboard";
@@ -29,7 +28,7 @@ function App() {
         <PrivateRoute path="/dashboard">
             <Dashboard />
         </PrivateRoute>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

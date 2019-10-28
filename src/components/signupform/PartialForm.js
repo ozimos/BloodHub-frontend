@@ -5,11 +5,10 @@ import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import RouterLink from "../RouterLink";
 import Grid from "@material-ui/core/Grid";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Link as ReactLink } from "react-router-dom";
-
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,27 +21,34 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function PartialForm({component: Component, dispatch, action, redirectPath, isLoggedIn}) {
 
+function PartialForm({
+  component: Component,
+  dispatch,
+  action,
+  redirectPath,
+  isLoggedIn
+}) {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({});
 
   const handleChange = e => {
     const { name, value } = e.target;
+    console.log("i am here");
     setFormData(state => ({ ...state, [name]: value }));
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    if (formData.firstName && formData.lastName && formData.email ) {
+    if (formData.firstName && formData.lastName && formData.email) {
       dispatch(action(formData));
     }
   };
 
-  return (
-    isLoggedIn ? <Redirect to={redirectPath} /> :
+  return isLoggedIn ? (
+    <Redirect to={redirectPath} />
+  ) : (
     <Fragment>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -84,7 +90,7 @@ function PartialForm({component: Component, dispatch, action, redirectPath, isLo
               onChange={handleChange}
             />
           </Grid>
-          {Component && <Component handleChange={handleChange}/>}
+          {Component && <Component handleChange={handleChange} />}
         </Grid>
         <Button
           type="submit"
@@ -107,8 +113,8 @@ function PartialForm({component: Component, dispatch, action, redirectPath, isLo
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isLoggedIn: state.auth.isLoggedIn
-})
+});
 
-export default connect(mapStateToProps)(PartialForm)
+export default connect(mapStateToProps)(PartialForm);
