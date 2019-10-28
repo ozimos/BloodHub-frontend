@@ -107,7 +107,7 @@ function SignInSide({isLoggedIn, user}) {
             </Button>
             <Grid container>
               <Grid item>
-                <Link component={RouterLink} to="/donate-blood-signup" variant="body2">
+                <Link component={RouterLink} to="signup/donate" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

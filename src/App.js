@@ -5,24 +5,20 @@ import Home from "./components/Home";
 import RequestBlood from "./components/RequestBlood";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
-import StartBloodRequest from "./components/StartBloodRequest";
-import DonateBloodRegistration from "./components/DonateBloodRegistration";
+import SignUp from "./components/SignUp";
 import "./App.css";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/donate-blood-signup">
-          <DonateBloodRegistration />
-        </Route>
-        <Route path="/request-blood">
-          <StartBloodRequest />
+        <Route path="/signup">
+          <SignUp />
         </Route>
         <Route path="/signin">
           <SignInSide />
         </Route>
-        <PrivateRoute path="/blood-details">
+        <PrivateRoute path="/blood-request-details">
             <RequestBlood />
         </PrivateRoute>
         <PrivateRoute path="/dashboard">
