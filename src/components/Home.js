@@ -60,12 +60,12 @@ export default function Album() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button component={RouterLink} to="/donate-blood-signup" variant="contained" color="primary">
+                  <Button component={RouterLink} to="/signup/donate" variant="contained" color="primary">
                     Sign Up as a Donor
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button component={RouterLink} to="/request-blood" variant="outlined" color="primary">
+                  <Button component={RouterLink} to="/signup/request" variant="outlined" color="primary">
                     Request Blood
                   </Button>
                 </Grid>
