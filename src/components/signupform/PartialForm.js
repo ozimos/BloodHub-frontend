@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 
-import TextField from "@material-ui/core/TextField";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { TextField } from "formik-material-ui";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import RouterLink from "../RouterLink";
@@ -24,7 +25,8 @@ function PartialForm({
   dispatch,
   action,
   redirectPath,
-  isLoggedIn
+  isLoggedIn,
+  isSubmitting
 }) {
   const classes = useStyles();
 
@@ -47,14 +49,15 @@ function PartialForm({
     <Redirect to={redirectPath} />
   ) : (
     <Fragment>
-      <form className={classes.form} noValidate onSubmit={handleSubmit}>
+      <Form className={classes.form} noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <TextField
+            <Field
               autoComplete="fname"
               name="firstName"
               variant="outlined"
               required
+              component={TextField}
               fullWidth
               id="firstName"
               label="First Name"
@@ -63,9 +66,13 @@ function PartialForm({
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
+            <ErrorMessage name="firstName" component="div" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Field
               variant="outlined"
               required
+              component={TextField}
               fullWidth
               id="lastName"
               label="Last Name"
@@ -74,10 +81,14 @@ function PartialForm({
               onChange={handleChange}
             />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <ErrorMessage name="lastName" component="div" />
+          </Grid>
           <Grid item xs={12}>
-            <TextField
+            <Field
               variant="outlined"
               required
+              component={TextField}
               fullWidth
               id="email"
               label="Email Address"
@@ -87,6 +98,9 @@ function PartialForm({
               onChange={handleChange}
             />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <ErrorMessage name="email" component="div" />
+          </Grid>
           {Component && <Component handleChange={handleChange} />}
         </Grid>
         <Button
@@ -95,6 +109,7 @@ function PartialForm({
           variant="contained"
           color="primary"
           className={classes.submit}
+          disabled={isSubmitting}
         >
           Proceed
         </Button>
@@ -105,7 +120,7 @@ function PartialForm({
             </Link>
           </Grid>
         </Grid>
-      </form>
+      </Form>
     </Fragment>
   );
 }
