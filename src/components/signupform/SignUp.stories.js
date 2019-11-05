@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 
 import BaseSignupForm from "./BaseSignupForm";
 import DonorFields from "./DonorFields";
-import PartialForm from "./PartialForm";
+import AuthForm from "./AuthForm";
 
 const store = {
   getState: () => ({ auth: { isLoggedIn: false } }),
@@ -48,8 +48,14 @@ const partialProps = {
 export const nonDonorSignupForm = () => <BaseSignupForm />;
 export const donorSignupForm = () => <BaseSignupForm component={DonorFields} />;
 export const donorFormikSignup = () => (
-  <PartialForm component={DonorFields} {...partialProps} />
+  <AuthForm component={DonorFields} {...partialProps}>
+    <BaseSignupForm component={DonorFields} />
+  </AuthForm>
 );
-export const nonDonorFormikSignup = () => <PartialForm {...partialProps} />;
+export const nonDonorFormikSignup = () => (
+  <AuthForm {...partialProps}>
+    <BaseSignupForm />
+  </AuthForm>
+);
 nonDonorSignupForm.story = wrapWithFormik;
 donorSignupForm.story = wrapWithFormik;

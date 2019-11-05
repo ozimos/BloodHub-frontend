@@ -1,13 +1,19 @@
 import React from "react";
 import { object } from "yup";
-import PartialForm, {baseInitialValues, baseValidationFields} from "./signupform/PartialForm";
+import AuthForm from "./signupform/AuthForm";
+import BaseSignupForm, {
+  baseInitialValues,
+  baseValidationFields
+} from "./BaseSignupForm";
 import { requestBlood } from "../../actions/auth";
 
 export default () => (
-  <PartialForm
+  <AuthForm
     action={requestBlood}
     redirectPath="/blood-request-details"
     validationSchema={object(baseValidationFields)}
     initialValues={baseInitialValues}
-  />
+  >
+    <BaseSignupForm />
+  </AuthForm>
 );
