@@ -1,22 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import SignInSide from "./components/SignInSide";
 import Home from "./components/Home";
 import RequestBlood from "./components/RequestBlood";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
-import SignUp from "./components/SignUp";
+import AuthPage from "./components/AuthPage";
 import "./App.css";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
-        <Route path="/signin">
-          <SignInSide />
+        <Route path="/auth">
+          <AuthPage />
         </Route>
         <PrivateRoute path="/blood-request-details">
             <RequestBlood />
