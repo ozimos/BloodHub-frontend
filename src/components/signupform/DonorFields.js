@@ -1,16 +1,66 @@
 import React, { Fragment } from "react";
 import { Field, ErrorMessage } from "formik";
+import { string, ref } from "yup";
 
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 
+const location = string()
+  .max(20, "Must be 20 characters or less")
+  .min(2, "Must be 2 characters or more")
+  .required("Required");
+
+export const donorInitialValues = {
+  bloodGroup: '',
+  street: '',
+  lg: '',
+  state: '',
+  password: '',
+  verifyPassword: '',
+}
+
+export const donorValidationFields = {
+  bloodGroup: string()
+    .max(3, "Must be 3 characters or less")
+    .required("Required"),
+  street: string()
+    .max(40, "Must be 40 characters or less")
+    .required("Required"),
+  lg: location,
+  state: location,
+  password: string()
+    .min(8, "Must be 8 characters or more")
+    .max(40, "Must be 40 characters or less")
+    .matches(
+      /^(?=.*?[#?!@$%^&*-]).{8,}$|.{15}/,
+      "Must have at least one special character or be at least 15 characters long"
+    )
+    .matches(
+      /^(?=.*?[A-Z]).{8,}$|.{15}/,
+      "Must have at least one uppercase character or be at least 15 characters long"
+    )
+    .matches(
+      /^(?=.*?[a-z]).{8,}$|.{15}/,
+      "Must have at least one lowercase character or be at least 15 characters long"
+    )
+    .matches(
+      /^(?=.*?[0-9]).{8,}$|.{15}/,
+      "Must have at least one integer or be at least than 15 characters long"
+    )
+    .required("Required"),
+  verifyPassword: string().oneOf(
+    [ref("password"), null],
+    "Passwords must match"
+  )
+};
+
 export default function DonorFields({ handleChange }) {
   const donorFields = [
     {
-      name: "blood-group",
+      name: "bloodGroup",
       label: "Blood Group",
-      id: "blood-group",
-      autoComplete: "blood-group"
+      id: "bloodGroup",
+      autoComplete: "bloodGroup"
     },
     {
       name: "street",

@@ -8,9 +8,8 @@ import Container from "@material-ui/core/Container";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import Copyright from "./Copyright";
 import Navbar from "./Navbar";
-import { signup, requestBlood } from "../actions/auth";
-import PartialForm from "./signupform/PartialForm";
-import DonorFields from "./signupform/DonorFields";
+import RequesterSignup from "./signupform/RequesterSignup";
+import DonorSignup from "./signupform/DonorSignup";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -44,17 +43,10 @@ export default function SignUp() {
           </Avatar>
           <Switch>
             <Route path={`${path}/donate`}>
-              <PartialForm
-                action={signup}
-                component={DonorFields}
-                redirectPath="/dashboard"
-              />
+              <DonorSignup />
             </Route>
             <Route path={`${path}/request`}>
-              <PartialForm
-                action={requestBlood}
-                redirectPath="/blood-request-details"
-              />
+              <RequesterSignup />
             </Route>
           </Switch>
         </div>
