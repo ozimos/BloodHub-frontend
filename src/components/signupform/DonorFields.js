@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Field, ErrorMessage } from "formik";
+import { Field } from "formik";
 import { string } from "yup";
 
 import TextField from "@material-ui/core/TextField";
@@ -58,8 +58,7 @@ export default function DonorFields({ handleChange }) {
   return (
     <Fragment>
       {donorFields.map(field => (
-        <Fragment key={field.id}>
-          <Grid item xs={12}>
+          <Grid key={field.id} item xs={12}>
             <Field
               variant="outlined"
               required
@@ -68,10 +67,6 @@ export default function DonorFields({ handleChange }) {
               {...field}
             />
           </Grid>
-          <Grid item xs={12}>
-            <ErrorMessage name={field.name} component="div" />
-          </Grid>
-        </Fragment>
       ))}
     </Fragment>
   );

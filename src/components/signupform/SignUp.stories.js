@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 
 import BaseSignupForm from "./BaseSignupForm";
 import DonorFields from "./DonorFields";
-import AuthForm from "./AuthForm";
+import AuthForm from "../AuthForm";
 
 const store = {
   getState: () => ({ auth: { isLoggedIn: false } }),
