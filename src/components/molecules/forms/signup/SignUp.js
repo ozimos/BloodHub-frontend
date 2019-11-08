@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
-import RequesterSignup from "./signupform/RequesterSignup";
-import DonorSignup from "./signupform/DonorSignup";
+import RequesterSignup from "./requester/RequesterSignup";
+import DonorSignup from "./donor/DonorSignup";
 
 export default function SignUp() {
   const { path } = useRouteMatch();

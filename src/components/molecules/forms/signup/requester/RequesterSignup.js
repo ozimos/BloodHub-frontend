@@ -1,11 +1,11 @@
 import React from "react";
 import { object } from "yup";
-import AuthForm from "../AuthForm";
+import AuthForm from "../../AuthForm";
 import BaseSignupForm, {
   baseInitialValues,
   baseValidationFields
-} from "./BaseSignupForm";
-import { requestBlood } from "../../actions/auth";
+} from "../BaseSignupForm";
+import { requestBlood } from "../../../../../actions/auth";
 
 export default () => (
   <AuthForm

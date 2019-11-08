@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
-import AuthForm from "./AuthForm";
-import SigninForm from "./SignInForm";
-import validationSchema, { initialValues } from "./formSettings";
-import { login } from "../actions/auth";
+import AuthForm from "../AuthForm";
+import SignInForm from "./SignInForm";
+import validationSchema, { initialValues } from "../signup/formSettings";
+import { login } from "../../../../actions/auth";
 
 export default function SignIn() {
   return (
@@ -16,7 +16,7 @@ export default function SignIn() {
         validationSchema={validationSchema}
         initialValues={initialValues}
       >
-        <SigninForm />
+        <SignInForm />
       </AuthForm>
     </Fragment>
   );

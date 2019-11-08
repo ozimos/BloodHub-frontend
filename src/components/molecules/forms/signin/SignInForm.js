@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/core/styles";
-import RouterLink from "./RouterLink";
+import RouterLink from "../../../atoms/RouterLink";
 
 const useStyles = makeStyles(theme => ({
   form: {
