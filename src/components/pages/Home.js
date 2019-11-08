@@ -5,9 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Copyright from './Copyright'
-import RouterLink from './RouterLink'
-import Navbar from './Navbar'
+import Copyright from '../atoms/Copyright'
+import RouterLink from '../atoms/RouterLink'
+import Navbar from '../molecules/Navbar'
 
 
 const useStyles = makeStyles(theme => ({

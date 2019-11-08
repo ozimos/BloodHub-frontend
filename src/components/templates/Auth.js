@@ -5,12 +5,12 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Copyright from "./Copyright";
+import Copyright from "../atoms/Copyright";
 import { makeStyles } from "@material-ui/core/styles";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
-import Navbar from "./Navbar";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
+import Navbar from "../molecules/Navbar";
+import SignUp from "../molecules/forms/signup/SignUp";
+import SignIn from "../molecules/forms/signin/SignIn";
 
 const useStyles = makeStyles(theme => ({
   root: {

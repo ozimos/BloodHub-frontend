@@ -9,8 +9,9 @@ import { action } from "@storybook/addon-actions";
 import { Provider } from "react-redux";
 
 import BaseSignupForm from "./BaseSignupForm";
-import DonorFields from "./DonorFields";
-import AuthForm from "../AuthForm";
+import DonorFields from "./donor/DonorFields";
+import DonorSignup from "./donor/DonorSignup";
+import RequesterSignup from "./requester/RequesterSignup";
 
 const store = {
   getState: () => ({ auth: { isLoggedIn: false } }),
@@ -40,22 +41,9 @@ export default {
   ]
 };
 
-const partialProps = {
-  action,
-  redirectPath: "/dashboard"
-};
-
-export const nonDonorSignupForm = () => <BaseSignupForm />;
+export const requesterSignupForm = () => <BaseSignupForm />;
 export const donorSignupForm = () => <BaseSignupForm component={DonorFields} />;
-export const donorFormikSignup = () => (
-  <AuthForm component={DonorFields} {...partialProps}>
-    <BaseSignupForm component={DonorFields} />
-  </AuthForm>
-);
-export const nonDonorFormikSignup = () => (
-  <AuthForm {...partialProps}>
-    <BaseSignupForm />
-  </AuthForm>
-);
-nonDonorSignupForm.story = wrapWithFormik;
+export const donorFormikSignup = () => <DonorSignup />;
+export const requesterFormikSignup = () => <RequesterSignup />;
+requesterSignupForm.story = wrapWithFormik;
 donorSignupForm.story = wrapWithFormik;

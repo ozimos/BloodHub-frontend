@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./components/Home";
-import RequestBlood from "./components/RequestBlood";
-import Dashboard from "./components/Dashboard";
-import PrivateRoute from "./components/PrivateRoute";
-import AuthPage from "./components/AuthPage";
+import Home from "./components/pages/Home";
+import RequestBlood from "./components/pages/RequestBlood";
+import Dashboard from "./components/pages/Dashboard";
+import PrivateRoute from "./components/atoms/PrivateRoute";
+import Auth from "./components/templates/Auth";
 import "./App.css";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/auth">
-          <AuthPage />
+          <Auth />
         </Route>
         <PrivateRoute path="/blood-request-details">
             <RequestBlood />
