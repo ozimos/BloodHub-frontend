@@ -48,6 +48,7 @@
     "@storybook/addon-actions": "^5.2.5",
     "@storybook/addon-links": "^5.2.5",
     "@storybook/addons": "^5.2.5",
-    "@storybook/react": "^5.2.5"
+    "@storybook/react": "^5.2.5",
+    "redux-mock-store": "^1.5.3"
   }
 }
