@@ -11,13 +11,13 @@ export const mockStore = configureMockStore(middlewares)
 const defaultStore = mockStore({ auth: { isLoggedIn: false } })
   
   
-export const createWrapper = (store=defaultStore) => ({ children }) =>  (
+export const configureProviderWrapper = (store=defaultStore, theme={}) => ({ children }) =>  (
     <Provider store={store}>
-      <ThemeProvider theme={createMuiTheme()}>{children}</ThemeProvider>
+      <ThemeProvider theme={createMuiTheme(theme)}>{children}</ThemeProvider>
     </Provider>
   );
 
-const customRender = (ui, wrapper=createWrapper(),  options) =>
+const customRender = (ui, wrapper=configureProviderWrapper(),  options) =>
   render(ui, { wrapper, ...options });
 
 export * from "@testing-library/react";

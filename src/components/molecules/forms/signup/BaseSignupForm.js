@@ -69,7 +69,7 @@ const fieldAttributes = {
   fullWidth: true
 };
 
-export default function BaseSignupForm({ component: Component, isSubmitting }) {
+export default function BaseSignupForm({ children, isSubmitting }) {
   const classes = useStyles();
   return (
     <Form className={classes.form} noValidate>
@@ -103,7 +103,7 @@ export default function BaseSignupForm({ component: Component, isSubmitting }) {
             {...fieldAttributes}
             />
         </Grid>
-        {Component && <Component />}
+        {children}
         <Grid item xs={12}>
           <Field
             id="password"
