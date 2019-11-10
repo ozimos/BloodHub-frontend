@@ -5,7 +5,7 @@ import BaseSignupForm, {
   baseInitialValues,
   baseValidationFields
 } from "../BaseSignupForm";
-import { requestBlood } from "../../../../../actions/auth";
+import { requestBlood } from "actions/auth";
 
 export default () => (
   <AuthForm

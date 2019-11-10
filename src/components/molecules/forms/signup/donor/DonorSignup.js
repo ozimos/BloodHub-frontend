@@ -9,7 +9,7 @@ import DonorFields, {
   donorInitialValues,
   donorValidationFields
 } from "./DonorFields";
-import { signup } from "../../../../../actions/auth";
+import { signup } from "actions/auth";
 
 export const initialValues = { ...baseInitialValues, ...donorInitialValues };
 

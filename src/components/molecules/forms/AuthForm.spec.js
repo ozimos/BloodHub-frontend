@@ -1,6 +1,6 @@
 import React from "react";
-import { render, configureProviderWrapper, mockStore } from "test-utils";
 import { MemoryRouter, Route } from "react-router-dom";
+import { render, configureProviderWrapper, mockStore } from "utils/test-utils";
 import AuthForm from "./AuthForm";
 
 const alternateRoutes = {

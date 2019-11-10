@@ -1,6 +1,6 @@
 import { AUTHENTICATE_USER } from "./types";
-import axios from "../utils/axiosInstance";
-import authUtils from "../utils/auth";
+import axios from "utils/axiosInstance";
+import authUtils from "utils/auth";
 
 export const getCurrentLoggedInUser = () => async dispatch => {
   try {
@@ -33,11 +33,10 @@ export const login = formData => async dispatch => {
 
 export const signup = formData => async dispatch => {
   try {
-    console.log(formData)
     const { data } = await axios.post("/users/signup", formData);
     authUtils.saveUserToken(data.token);
     dispatch({ type: AUTHENTICATE_USER, payload: data });
-    await getCurrentLoggedInUser()(dispatch);
+    await dispatch(getCurrentLoggedInUser());
     return null;
   } catch (err) {
     dispatch({ type: AUTHENTICATE_USER });

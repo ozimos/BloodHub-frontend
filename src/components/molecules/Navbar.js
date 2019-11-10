@@ -3,9 +3,8 @@ import AppBar from '@material-ui/core/AppBar';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import RouterLink from '../atoms/RouterLink'
-
 import { makeStyles } from '@material-ui/core/styles';
+import RouterLink from 'components/atoms/RouterLink'
 
 const useStyles = makeStyles(theme => ({
     icon: {

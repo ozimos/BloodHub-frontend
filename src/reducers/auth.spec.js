@@ -1,5 +1,5 @@
 import authReducer, { initialState } from "./auth";
-import { AUTHENTICATE_USER } from "../actions/types";
+import { AUTHENTICATE_USER } from "actions/types";
 
 describe("auth reducer", () => {
   it("should return the initial state", () => {

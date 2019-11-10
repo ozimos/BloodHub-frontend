@@ -1,7 +1,7 @@
 import React from "react";
-import { render } from "test-utils";
 import { getAllByLabelText } from "@testing-library/dom";
 import { Formik, Form } from "formik";
+import { render } from "utils/test-utils";
 import DonorFields from "./DonorFields";
 
 const formikWrapper = ({ children }) => (

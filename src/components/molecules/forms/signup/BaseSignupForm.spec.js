@@ -1,11 +1,11 @@
 import React from "react";
-import { render, fireEvent, act } from "test-utils";
 import { getAllByLabelText } from "@testing-library/dom";
 import { Formik } from "formik";
+import { MemoryRouter } from "react-router-dom";
+import { render, fireEvent, act } from "utils/test-utils";
 import BaseSignupForm, {
   baseInitialValues as initialValues
 } from "./BaseSignupForm";
-import { MemoryRouter } from "react-router-dom";
 
 const handleSubmit = jest.fn((values, { setSubmitting }) => {
   setSubmitting(false);

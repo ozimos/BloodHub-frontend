@@ -1,13 +1,12 @@
 import React from "react";
-
 import { Field, Form } from "formik";
 import { TextField } from "formik-material-ui";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
-import RouterLink from "../../../atoms/RouterLink";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { string, ref } from "yup";
+import RouterLink from "components/atoms/RouterLink";
 import {initialValues, validationFields} from './formSettings'
 
 
