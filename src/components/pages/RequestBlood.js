@@ -13,8 +13,8 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Copyright from '../atoms/Copyright'
-import Navbar from '../molecules/Navbar'
+import Copyright from 'components/atoms/Copyright'
+import Navbar from 'components/molecules/Navbar'
 
 const useStyles = makeStyles(theme => ({
   "@global": {

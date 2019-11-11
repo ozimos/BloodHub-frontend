@@ -1,8 +1,9 @@
 import {
   AUTHENTICATE_USER,
-} from '../actions/types';
+} from 'actions/types';
 
-const initialState = { user: null, isLoggedIn: null };
+export const initialState = { user: null, isLoggedIn: null };
+
 export default ( state = initialState, action ) => {
   const { type, payload = null } = action;
 

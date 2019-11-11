@@ -1,15 +1,13 @@
 import React from "react";
-
 import { Field, Form } from "formik";
 import { TextField } from "formik-material-ui";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
-import RouterLink from "../../../atoms/RouterLink";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { string, ref } from "yup";
-import {initialValues, validationFields} from './formSettings'
-
+import RouterLink from "components/atoms/RouterLink";
+import { initialValues, validationFields } from "./formSettings";
 
 export const baseInitialValues = {
   firstName: "",
@@ -46,10 +44,9 @@ export const baseValidationFields = {
       "Must have at least one integer or be at least than 15 characters long"
     )
     .required("Required"),
-  verifyPassword: string().oneOf(
-    [ref("password"), null],
-    "Passwords must match"
-  )
+  verifyPassword: string()
+    .oneOf([ref("password"), null], "Passwords must match")
+    .required("Required")
 };
 
 const useStyles = makeStyles(theme => ({
@@ -64,12 +61,12 @@ const useStyles = makeStyles(theme => ({
 
 const fieldAttributes = {
   variant: "outlined",
-  required: true,
   component: TextField,
+  required: true,
   fullWidth: true
 };
 
-export default function BaseSignupForm({ component: Component, isSubmitting }) {
+export default function BaseSignupForm({ children, isSubmitting }) {
   const classes = useStyles();
   return (
     <Form className={classes.form} noValidate>
@@ -99,18 +96,18 @@ export default function BaseSignupForm({ component: Component, isSubmitting }) {
             label="Email Address"
             type="email"
             name="email"
-            autoComplete="email"
+            autoComplete="off"
             {...fieldAttributes}
-            />
+          />
         </Grid>
-        {Component && <Component />}
+        {children}
         <Grid item xs={12}>
           <Field
             id="password"
             label="Password"
             type="password"
             name="password"
-            autoComplete="password"
+            autoComplete="off"
             {...fieldAttributes}
           />
         </Grid>

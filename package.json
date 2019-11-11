@@ -3,16 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.5.2",
+    "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
-    "@material-ui/lab": "^4.0.0-alpha.30",
+    "@material-ui/lab": "^4.0.0-alpha.31",
     "axios": "^0.19.0",
     "dotenv": "^8.2.0",
     "formik": "^2.0.3",
     "formik-material-ui": "^1.0.0",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.19.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-redux": "^7.1.1",
+    "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
@@ -22,15 +25,33 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "npm run jest:test -- --coverage && npm run cy:test",
+    "pretest": "rm -rf .nyc_output || true",
+    "posttest": "npm run report:combined",
+    "mkdir:reports": "mkdir reports || true",
+    "precopy:reports": "npm run mkdir:reports",
+    "copy:reports": "cp cypress-coverage/coverage-final.json reports/from-cypress.json && cp coverage/coverage-final.json reports/from-jest.json",
+    "precombine:reports": "npm run copy:reports && mkdir .nyc_output || true",
+    "combine:reports": "nyc merge reports && mv coverage.json .nyc_output/out.json",
+    "prereport:combined": "npm run combine:reports",
+    "report:combined": "nyc report --reporter lcov --report-dir combined-coverage",
+    "jest:test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "cy:open": "cypress open --env coverage=false",
+    "cy:run": "cypress run",
+    "cy:test": "start-server-and-test start http-get://localhost:3000 cy:run",
+    "lint": "eslint src/**/*.js --max-warnings 5"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "globals": {
+      "cy": "readonly",
+      "context": "readonly"
+    }
   },
   "browserslist": {
     "production": [
@@ -44,10 +65,59 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.stories.js",
+      "!src/utils/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 25,
+        "functions": 25,
+        "lines": 25,
+        "statements": 25
+      }
+    }
+  },
+  "nyc": {
+    "report-dir": "cypress-coverage",
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/util.js"
+    ]
+  },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.2.5",
-    "@storybook/addon-links": "^5.2.5",
-    "@storybook/addons": "^5.2.5",
-    "@storybook/react": "^5.2.5"
+    "@cypress/code-coverage": "^1.10.1",
+    "@cypress/instrument-cra": "^1.0.0",
+    "@storybook/addon-actions": "^5.2.6",
+    "@storybook/addon-links": "^5.2.6",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/react": "^5.2.6",
+    "@testing-library/cypress": "^5.0.2",
+    "@testing-library/dom": "^6.10.1",
+    "@testing-library/jest-dom": "^4.2.3",
+    "@testing-library/react": "^9.3.2",
+    "axios-mock-adapter": "^1.17.0",
+    "cypress": "^3.6.1",
+    "istanbul-lib-coverage": "^2.0.5",
+    "jest-extended": "^0.11.2",
+    "nyc": "^14.1.1",
+    "redux-mock-store": "^1.5.3",
+    "start-server-and-test": "^1.10.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
