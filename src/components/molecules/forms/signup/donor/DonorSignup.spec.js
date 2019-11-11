@@ -10,7 +10,10 @@ const labels = [
   "Email Address",
   "Password",
   "Verify Password",
-  "Blood Group", "Street Address", "Local Government", "State"
+  "Blood Group",
+  "Street Address",
+  "Local Government",
+  "State"
 ];
 
 const Wrapper = () => (
@@ -19,19 +22,19 @@ const Wrapper = () => (
   </MemoryRouter>
 );
 
-  it("renders all required input fields", async () => {
-    const { container, getByRole } = render(<Wrapper />);
-    const inputFields = getAllByLabelText(
-      container,
-      content => labels.some(entry => content.startsWith(entry)),
-      {
-        selector: "input",
-        exact: false
-      }
-    );
-    expect(inputFields).toHaveLength(labels.length);
-    const submitButton = getByRole("button");
-    await act(async () => {
-      fireEvent.click(submitButton, {});
-    });
+it("renders all required input fields", async () => {
+  const { container, getByText } = render(<Wrapper />);
+  const inputFields = getAllByLabelText(
+    container,
+    content => labels.some(entry => content.startsWith(entry)),
+    {
+      selector: "input",
+      exact: false
+    }
+  );
+  expect(inputFields).toHaveLength(labels.length);
+  const submitButton = getByText(/Proceed/i);
+  await act(async () => {
+    fireEvent.click(submitButton, {});
   });
+});
