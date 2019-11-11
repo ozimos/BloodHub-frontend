@@ -7,8 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { string, ref } from "yup";
 import RouterLink from "components/atoms/RouterLink";
-import {initialValues, validationFields} from './formSettings'
-
+import { initialValues, validationFields } from "./formSettings";
 
 export const baseInitialValues = {
   firstName: "",
@@ -45,10 +44,9 @@ export const baseValidationFields = {
       "Must have at least one integer or be at least than 15 characters long"
     )
     .required("Required"),
-  verifyPassword: string().oneOf(
-    [ref("password"), null],
-    "Passwords must match"
-  )
+  verifyPassword: string()
+    .oneOf([ref("password"), null], "Passwords must match")
+    .required("Required")
 };
 
 const useStyles = makeStyles(theme => ({
@@ -63,8 +61,8 @@ const useStyles = makeStyles(theme => ({
 
 const fieldAttributes = {
   variant: "outlined",
-  required: true,
   component: TextField,
+  required: true,
   fullWidth: true
 };
 
@@ -98,9 +96,9 @@ export default function BaseSignupForm({ children, isSubmitting }) {
             label="Email Address"
             type="email"
             name="email"
-            autoComplete="email"
+            autoComplete="off"
             {...fieldAttributes}
-            />
+          />
         </Grid>
         {children}
         <Grid item xs={12}>
@@ -109,7 +107,7 @@ export default function BaseSignupForm({ children, isSubmitting }) {
             label="Password"
             type="password"
             name="password"
-            autoComplete="password"
+            autoComplete="off"
             {...fieldAttributes}
           />
         </Grid>

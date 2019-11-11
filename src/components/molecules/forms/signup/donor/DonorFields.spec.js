@@ -10,7 +10,7 @@ const formikWrapper = ({ children }) => (
   </Formik>
 );
 
-const labels = ["Blood Group", "Street Address", "LG", "State"];
+const labels = ["Blood Group", "Street Address", "Local Government", "State"];
 
 it("renders all required input fields", () => {
   const { container } = render(

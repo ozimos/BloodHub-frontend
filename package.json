@@ -33,7 +33,11 @@
     "cy:test": "start-server-and-test start http-get://localhost:3000 cy:run"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "globals": {
+      "cy": "readonly",
+      "context": "readonly"
+    }
   },
   "browserslist": {
     "production": [
@@ -51,15 +55,15 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.stories.js",
-      "!src/utils/test-utils.js",
+      "!src/utils/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/node_modules/"
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 90,
-        "functions": 90,
-        "lines": 90,
-        "statements": 90
+        "branches": 25,
+        "functions": 25,
+        "lines": 25,
+        "statements": 25
       }
     }
   },
@@ -68,6 +72,7 @@
     "@storybook/addon-links": "^5.2.6",
     "@storybook/addons": "^5.2.6",
     "@storybook/react": "^5.2.6",
+    "@testing-library/cypress": "^5.0.2",
     "@testing-library/dom": "^6.10.1",
     "@testing-library/jest-dom": "^4.2.3",
     "@testing-library/react": "^9.3.2",

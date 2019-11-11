@@ -10,7 +10,7 @@ const labels = [
   "Email Address",
   "Password",
   "Verify Password",
-  "Blood Group", "Street Address", "LG", "State"
+  "Blood Group", "Street Address", "Local Government", "State"
 ];
 
 const Wrapper = () => (

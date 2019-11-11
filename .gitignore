@@ -3,6 +3,7 @@
 
 # Cypress Examples
 cypress/integration/Examples
+cypress/videos
 
 # Storybook Examples
 src/stories
