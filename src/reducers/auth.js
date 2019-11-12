@@ -1,16 +1,11 @@
-import {
-  AUTHENTICATE_USER,
-} from 'actions/types';
+import { authenticateUser } from "actions/auth";
+import { createReducer } from "redux-starter-kit";
 
 export const initialState = { user: null, isLoggedIn: null };
-
-export default ( state = initialState, action ) => {
-  const { type, payload = null } = action;
-
-  switch ( type ) {
-    case AUTHENTICATE_USER:
-      return payload ? { ...payload, isLoggedIn: true } : { user: null, isLoggedIn: false };
-    default:
-      return state;
+export default createReducer(initialState, {
+  [authenticateUser]: (state, { payload }) => {
+    return payload
+      ? { ...payload, isLoggedIn: true }
+      : { user: null, isLoggedIn: false };
   }
-};
+});

@@ -3,8 +3,6 @@ executors:
   my-executor:
     docker:
       - image: cypress/base:12.6.0
-    working_directory:  ~/project/
-
 orbs:
   cypress: cypress-io/cypress@1.13.0
   snyk: snyk/snyk@0.0.8
@@ -13,25 +11,34 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          at: ~/project/
+          at: ~/
       - run: yarn lint
   jest:
     executor: my-executor
     steps:
       - attach_workspace:
-          at: ~/project/
-      - run: yarn jest:test --coverage
+          at: ~/
+      - run:
+          name: Run Jest Tests and convert coverage
+          command: |
+           yarn jest:test --coverage
+           ./cc-test-reporter format-coverage coverage/lcov.info -t lcov -o ./codeclimate.jest.json
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - .
+
   combine-coverage:
     executor: my-executor
     steps:
       - attach_workspace:
-          at: ~/project/
+          at: ~/
       - run:
-          name: Run LMS_Music Tests
+          name: Combine Tests Reports
           command: |
-            ./cc-test-reporter before-build
-            yarn report:combined
-            ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
+            ./cc-test-reporter format-coverage cypress-coverage/lcov.info -t lcov -o ./codeclimate.cypress.json
+            ./cc-test-reporter sum-coverage ./codeclimate.*.json -p 2 -o ./codeclimate.total.json
+            ./cc-test-reporter upload-coverage -i ./codeclimate.total.json --debug
 
 workflows:
   build:
@@ -45,6 +52,7 @@ workflows:
                 command: |
                   curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
                   chmod +x ./cc-test-reporter
+                  ./cc-test-reporter before-build
           
       - lint:
           requires: 
@@ -54,10 +62,14 @@ workflows:
             - cypress/install
       - combine-coverage:
           requires: 
-            - cypress/run
+            - cypress/e2e
             - jest
       - cypress/run:
           executor: my-executor
+          name: cypress/e2e
+          yarn: true
+          requires: 
+            - cypress/install
           # run all tests
           start: yarn start
           wait-on: 'http-get://localhost:3000'
@@ -67,3 +79,4 @@ workflows:
             # to see live static HTML site
             - store_artifacts:
                 path: cypress-coverage
+           
