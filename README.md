@@ -1,4 +1,9 @@
 # BloodHub-frontend
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/da3a7b769ced7caf0292/maintainability)](https://codeclimate.com/github/ozimos/BloodHub-frontend/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/da3a7b769ced7caf0292/test_coverage)](https://codeclimate.com/github/ozimos/BloodHub-frontend/test_coverage)
+[![CircleCI](https://circleci.com/gh/ozimos/BloodHub-frontend.svg?style=svg)](https://circleci.com/gh/ozimos/BloodHub-frontend)
+
 The frontend for BloodHub
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
