@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 
 import BaseSignupForm from "./BaseSignupForm";
 import DonorFields from "./donor/DonorFields";
-import DonorSignup from "./donor/DonorSignup";
+import DonorSignup, { initialValues } from "./donor/DonorSignup";
 import RequesterSignup from "./requester/RequesterSignup";
 
 const store = {
@@ -20,7 +20,9 @@ const store = {
 };
 const Div = styled("div")({ backgroundColor: "white" });
 const wrapWithFormik = {
-  decorators: [storyFn => <Formik>{storyFn()}</Formik>]
+  decorators: [
+    storyFn => <Formik initialValues={initialValues}>{storyFn()}</Formik>
+  ]
 };
 
 export default {

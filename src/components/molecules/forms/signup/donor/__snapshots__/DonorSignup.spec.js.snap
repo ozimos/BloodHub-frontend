@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders all required input fields with error labels 1`] = `
+Snapshot Diff:
+- First value
++ Second value
+
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined Mui-focused Mui-focused Mui-required Mui-required"
+-             data-shrink="true"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
++             data-shrink="false"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth Mui-focused Mui-focused MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
+-               aria-invalid="false"
++               aria-describedby="firstName-helper-text"
++               aria-invalid="true"
+@@ --- --- @@
+-                 style="width: 0px;"
++                 style="width: 0.01px;"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="firstName-helper-text"
++           >
++             Required
++           </p>
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
+-               aria-invalid="false"
++               aria-describedby="lastName-helper-text"
++               aria-invalid="true"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="lastName-helper-text"
++           >
++             Required
++           </p>
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
+-               aria-invalid="false"
++               aria-describedby="email-helper-text"
++               aria-invalid="true"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="email-helper-text"
++           >
++             Required
++           </p>
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
++               aria-describedby="bloodGroup-helper-text"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="bloodGroup-helper-text"
++           >
++             Required
++           </p>
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
+-               aria-invalid="false"
++               aria-describedby="street-address-helper-text"
++               aria-invalid="true"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="street-address-helper-text"
++           >
++             Required
++           </p>
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
+-               aria-invalid="false"
++               aria-describedby="lg-helper-text"
++               aria-invalid="true"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="lg-helper-text"
++           >
++             Required
++           </p>
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
+-               aria-invalid="false"
++               aria-describedby="state-helper-text"
++               aria-invalid="true"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="state-helper-text"
++           >
++             Required
++           </p>
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
+-               aria-invalid="false"
++               aria-describedby="password-helper-text"
++               aria-invalid="true"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="password-helper-text"
++           >
++             Required
++           </p>
+@@ --- --- @@
+-             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
++             class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-error Mui-error Mui-required Mui-required"
+@@ --- --- @@
+-               class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
++               class="MuiFormLabel-asterisk MuiInputLabel-asterisk Mui-error Mui-error"
+@@ --- --- @@
+-             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
++             class="MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl"
+@@ --- --- @@
+-               aria-invalid="false"
++               aria-describedby="verifyPassword-helper-text"
++               aria-invalid="true"
+@@ --- --- @@
++           <p
++             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
++             id="verifyPassword-helper-text"
++           >
++             Required
++           </p>
+`;
