@@ -70,13 +70,9 @@ workflows:
           yarn: true
           requires: 
             - cypress/install
-          # run all tests
           start: yarn start
           wait-on: 'http-get://localhost:3000'
           post-steps:
-            # store the created coverage report folder
-            # you can click on it in the CircleCI UI
-            # to see live static HTML site
             - store_artifacts:
                 path: cypress-coverage
            

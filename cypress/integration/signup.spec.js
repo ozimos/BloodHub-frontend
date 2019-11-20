@@ -18,7 +18,7 @@ context("Actions", () => {
       .should("have.value", "fake@email.com");
     cy.findByLabelText(/Blood Group/i).click();
     cy.focused().type("{downarrow}{downarrow}{enter}");
-    cy.findByTestId("bloodGroup").should("have.value", "B+");
+    cy.findByTestId("bloodGroup").should("have.value", "B_positive");
     cy.findByLabelText(/Street Address/i)
       .type("1 Random Street")
       .should("have.value", "1 Random Street");

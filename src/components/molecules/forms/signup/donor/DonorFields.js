@@ -16,7 +16,16 @@ export const donorInitialValues = {
   lg: "",
   state: ""
 };
-const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+const bloodGroups = [
+  "A_positive",
+  "A_negative",
+  "B_positive",
+  "B_negative",
+  "AB_positive",
+  "AB_negative",
+  "O_positive",
+  "O_negative"
+];
 export const donorValidationFields = {
   bloodGroup: string()
     .oneOf(bloodGroups)
@@ -57,6 +66,13 @@ export default function DonorFields() {
       label: "State",
       id: "state",
       autoComplete: "state"
+    },
+    {
+      name: "phone",
+      label: "Phone Number",
+      id: "phone",
+      autoComplete: "phone",
+      type: "phone"
     }
   ];
 
