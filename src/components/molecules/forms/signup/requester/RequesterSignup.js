@@ -5,13 +5,13 @@ import BaseSignupForm, {
   baseInitialValues,
   baseValidationFields
 } from "../BaseSignupForm";
-import { requestBlood } from "actions/auth";
+import { REGISTER_USER } from "apolloUtils/requests";
 
 export default () => (
   <AuthForm
-    action={requestBlood}
     redirectPath="/blood-request-details"
     validationSchema={object(baseValidationFields)}
+    authMutation={REGISTER_USER}
     initialValues={baseInitialValues}
   >
     <BaseSignupForm />

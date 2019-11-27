@@ -1,11 +1,6 @@
-const tokenKey = 'token';
+const tokenKey = "token";
 
-const saveUserToken = token => window.localStorage.setItem( tokenKey, token );
-const getUserToken = () => window.localStorage.getItem( tokenKey );
-const deleteUserToken = () => window.localStorage.removeItem( tokenKey );
-
-export default {
-  saveUserToken,
-  getUserToken,
-  deleteUserToken,
-};
+export const saveUserToken = token =>
+  window.localStorage.setItem(tokenKey, token);
+export const getUserToken = () => window.localStorage.getItem(tokenKey);
+export const deleteUserToken = () => window.localStorage.removeItem(tokenKey);

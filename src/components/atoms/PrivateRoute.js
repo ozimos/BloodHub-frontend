@@ -1,11 +1,18 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import auth from 'utils/auth'
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { getUserToken } from "utils/auth";
 
-export default  ({ children, ...rest }) => (
-    <Route {...rest} render={props => (
-        auth.getUserToken()
-            ? children
-            : <Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
-    )} />
-)
+export default ({ children, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      getUserToken() ? (
+        children
+      ) : (
+        <Redirect
+          to={{ pathname: "/signin", state: { from: props.location } }}
+        />
+      )
+    }
+  />
+);

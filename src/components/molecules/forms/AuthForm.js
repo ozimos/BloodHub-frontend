@@ -1,26 +1,48 @@
 import React from "react";
 import { Formik } from "formik";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { IS_LOGGED_IN } from "apolloUtils/requests";
+import { saveUserToken } from "utils/auth";
 
-function AuthForm({
-  dispatch,
-  action,
+export default function AuthForm({
   initialValues,
   validationSchema,
+  authMutation,
   redirectPath,
-  isLoggedIn,
-  user,
   children
 }) {
-  const handleSubmit = async (values, { setSubmitting }) => {
-    await dispatch(action(values));
+  const { data: queryData } = useQuery(IS_LOGGED_IN);
+  const [authorizeUser, { data }] = useMutation(authMutation, {
+    update(
+      cache,
+      {
+        data: {
+          [authMutation]: { user, token }
+        }
+      }
+    ) {
+      cache.writeData({ data: { user, token } });
+      saveUserToken(token);
+    }
+  });
+
+  const handleSubmit = async (
+    { bloodGroup, document, ...values },
+    { setSubmitting }
+  ) => {
+    const data = bloodGroup
+      ? { donor: { create: { bloodGroup, document } }, ...values }
+      : values;
+    await authorizeUser({ variables: { data } });
     setSubmitting(false);
   };
+  const defaultRedirectPath =
+    queryData && queryData[IS_LOGGED_IN].isDonor
+      ? "/dashboard"
+      : "/blood-request-details";
 
-  const defaultRedirectPath = (user && user.isDonor) ? "/dashboard" : "/blood-request-details";
-
-  return isLoggedIn ? (
+  return queryData && queryData[IS_LOGGED_IN].isLoggedIn ? (
     <Redirect to={redirectPath || defaultRedirectPath} />
   ) : (
     <Formik
@@ -32,10 +54,3 @@ function AuthForm({
     </Formik>
   );
 }
-
-const mapStateToProps = state => ({
-  user: state.auth.user,
-  isLoggedIn: state.auth.isLoggedIn
-});
-
-export default connect(mapStateToProps)(AuthForm);
