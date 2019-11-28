@@ -5,6 +5,14 @@ import { MockedProvider } from "@apollo/react-testing";
 import { render } from "@testing-library/react";
 import { REGISTER_USER, LOG_IN_USER } from "apolloUtils/requests";
 import { resolvers as defaultResolvers } from "apolloUtils/resolvers";
+import {gql} from 'apollo-boost'
+
+const MOCK_REGISTER_USER = gql`
+mutation {
+  userRegister(data: {})
+}
+`
+MOCK_REGISTER_USER.toString = () => "userRegister";
 
 export const defaultMocks = [
   {
@@ -56,7 +64,7 @@ export const defaultMocks = [
 ];
 
 export const configureProviderWrapper = ({
-  mocks = [],
+  mocks = defaultMocks,
   theme = {},
   resolvers = defaultResolvers,
   ...rest

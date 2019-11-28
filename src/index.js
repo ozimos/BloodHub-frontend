@@ -3,22 +3,27 @@ import ReactDOM from "react-dom";
 import { StylesProvider } from "@material-ui/core/styles";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
+import { InMemoryCache } from "apollo-cache-inmemory";
 import { getUserToken } from "utils/auth";
 import { typeDefs, resolvers } from "apolloUtils/resolvers";
 
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
+const cache = new InMemoryCache();
+cache.writeData({
+  data: {  user: { __typename: "User", isDonor: false, isLoggedIn: false, } }
+});
 const client = new ApolloClient({
   uri:
-    process.env.REACT_APP_API_URL ||
+  "http://localhost:4000" ||
     "https://secret-island-30539.herokuapp.com/",
   headers: {
     authorization: getUserToken()
   },
   resolvers,
-  typeDefs
+  typeDefs,
+  cache
 });
 
 const jsx = (

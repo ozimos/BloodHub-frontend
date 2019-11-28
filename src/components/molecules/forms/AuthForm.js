@@ -2,8 +2,9 @@ import React from "react";
 import { Formik } from "formik";
 import { Redirect } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { IS_LOGGED_IN } from "apolloUtils/requests";
+import { GET_CURRENT_USER } from "apolloUtils/requests";
 import { saveUserToken } from "utils/auth";
+import { useHistory } from "react-router-dom";
 
 export default function AuthForm({
   initialValues,
@@ -12,8 +13,9 @@ export default function AuthForm({
   redirectPath,
   children
 }) {
-  const { data: queryData } = useQuery(IS_LOGGED_IN);
-  const [authorizeUser, { data }] = useMutation(authMutation, {
+  const history = useHistory();
+  const { data: userData } = useQuery(GET_CURRENT_USER);
+  const [authorizeUser] = useMutation(authMutation, {
     update(
       cache,
       {
@@ -24,11 +26,14 @@ export default function AuthForm({
     ) {
       cache.writeData({ data: { user, token } });
       saveUserToken(token);
+    },
+    onCompleted() {
+      history.push(redirectPath);
     }
   });
 
   const handleSubmit = async (
-    { bloodGroup, document, ...values },
+    { bloodGroup, document, verifyPassword, ...values },
     { setSubmitting }
   ) => {
     const data = bloodGroup
@@ -38,11 +43,10 @@ export default function AuthForm({
     setSubmitting(false);
   };
   const defaultRedirectPath =
-    queryData && queryData[IS_LOGGED_IN].isDonor
+    userData && userData.isLoggedIn && userData[GET_CURRENT_USER].isDonor
       ? "/dashboard"
       : "/blood-request-details";
-
-  return queryData && queryData[IS_LOGGED_IN].isLoggedIn ? (
+  return userData && userData.isLoggedIn ? (
     <Redirect to={redirectPath || defaultRedirectPath} />
   ) : (
     <Formik

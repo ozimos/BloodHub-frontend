@@ -14,7 +14,8 @@ export const donorInitialValues = {
   bloodGroup: "",
   street: "",
   lg: "",
-  state: ""
+  state: "",
+  phone: ""
 };
 const bloodGroups = [
   "A_positive",

@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from "graphql.macro";
 
 const AUTH_USER_FRAGMENT = gql`
   fragment AuthUserFragment on User {
@@ -40,14 +40,22 @@ export const LOG_IN_USER = gql`
 
 LOG_IN_USER.toString = () => "userLogin";
 
-export const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
+export const GET_CURRENT_USER = gql`
+  {
+    isLoggedIn @client(always: true)
     getCurrentUser {
       ...AuthUserFragment
-      isLoggedIn @client(always: true)
     }
   }
   ${AUTH_USER_FRAGMENT}
 `;
 
-IS_LOGGED_IN.toString = () => "getCurrentUser";
+GET_CURRENT_USER.toString = () => "getCurrentUser";
+
+export const IS_LOGGED_IN = gql`
+  {
+    isLoggedIn @client(always: true)
+  }
+`;
+
+IS_LOGGED_IN.toString = () => "isLoggedIn";

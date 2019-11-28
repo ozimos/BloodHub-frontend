@@ -15,8 +15,7 @@ const alternateRoutes = {
 };
 const defaultContent = "default content";
 const store = {
-  isLoggedIn: false,
-  user: { __typename: "User", isDonor: true }
+  isLoggedIn: false, user: { __typename: "User", isDonor: true,  }
 };
 const RouterWrapper = ({ children }) => (
   <MemoryRouter>
@@ -48,6 +47,7 @@ describe("it renders based on user auth status", () => {
   });
 
   it("redirects to selected path when user is logged in", async () => {
+    console.log(REGISTER_USER)
     localStorage.getItem.mockReturnValue("token");
     cache.writeData({ data: store });
     await act(async () => {
@@ -55,8 +55,7 @@ describe("it renders based on user auth status", () => {
         <TestComponent redirectPath={alternateRoutes.test.path} />,
         ProviderWrapper
       );
-      await wait();
-      getByText(alternateRoutes.test.content);
+      await wait(() => getByText(alternateRoutes.test.content));
     });
   });
 
@@ -73,7 +72,7 @@ describe("it renders based on user auth status", () => {
   it("redirects to request page for logged in non donors when redirect prop is not provided", async () => {
     localStorage.getItem.mockReturnValue("token");
     cache.writeData({
-      data: { isLoggedIn: true, user: { __typename: "User", isDonor: false } }
+      data: { isLoggedIn: false,  user: { __typename: "User", isDonor: false } }
     });
     await act(async () => {
       const { getByText } = render(<TestComponent />, ProviderWrapper);
