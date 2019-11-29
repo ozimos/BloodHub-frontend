@@ -3,21 +3,17 @@ import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MockedProvider } from "@apollo/react-testing";
 import { render } from "@testing-library/react";
-import { REGISTER_USER, LOG_IN_USER } from "apolloUtils/requests";
+import {
+  REGISTER_USER,
+  LOG_IN_USER,
+  GET_CURRENT_USER
+} from "apolloUtils/requests";
 import { resolvers as defaultResolvers } from "apolloUtils/resolvers";
-import {gql} from 'apollo-boost'
-
-const MOCK_REGISTER_USER = gql`
-mutation {
-  userRegister(data: {})
-}
-`
-MOCK_REGISTER_USER.toString = () => "userRegister";
 
 export const defaultMocks = [
   {
     request: {
-      mutation: REGISTER_USER,
+      query: REGISTER_USER,
       variables: {
         data: {
           firstName: "Buck",
@@ -34,8 +30,13 @@ export const defaultMocks = [
     result: {
       data: {
         [REGISTER_USER]: {
-          isLoggedIn: true,
-          user: { firstName: "Buck", lastName: "Buck", isDonor: true },
+          user: {
+            __typename: "User",
+            id: "someid",
+            firstName: "Buck",
+            lastName: "Buck",
+            isDonor: true
+          },
           token: "randomtoken"
         }
       }
@@ -43,7 +44,7 @@ export const defaultMocks = [
   },
   {
     request: {
-      mutation: LOG_IN_USER,
+      query: LOG_IN_USER,
       variables: {
         data: {
           email: "hail@hydra.com",
@@ -54,9 +55,32 @@ export const defaultMocks = [
     result: {
       data: {
         [LOG_IN_USER]: {
-          isLoggedIn: true,
-          user: { firstName: "Buck", lastName: "Buck", isDonor: true },
+          user: {
+            __typename: "User",
+            id: "someid",
+            firstName: "Buck",
+            lastName: "Buck",
+            isDonor: true
+          },
           token: "randomtoken"
+        }
+      }
+    }
+  },
+  {
+    request: {
+      query: GET_CURRENT_USER,
+      variables: {}
+    },
+    result: {
+      data: {
+        isLoggedIn: true,
+        [GET_CURRENT_USER]: {
+          __typename: "User",
+          id: "someid",
+          firstName: "Buck",
+          lastName: "Buck",
+          isDonor: true
         }
       }
     }
@@ -69,12 +93,7 @@ export const configureProviderWrapper = ({
   resolvers = defaultResolvers,
   ...rest
 } = {}) => ({ children }) => (
-  <MockedProvider
-    mocks={mocks}
-    resolvers={resolvers}
-    addTypename={false}
-    {...rest}
-  >
+  <MockedProvider mocks={mocks} resolvers={resolvers} {...rest}>
     <ThemeProvider theme={createMuiTheme(theme)}>{children}</ThemeProvider>
   </MockedProvider>
 );

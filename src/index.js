@@ -12,11 +12,11 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 const cache = new InMemoryCache();
 cache.writeData({
-  data: {  user: { __typename: "User", isDonor: false, isLoggedIn: false, } }
+  data: { user: { __typename: "User", isDonor: false, isLoggedIn: false } }
 });
 const client = new ApolloClient({
   uri:
-  "http://localhost:4000" ||
+    process.env.REACT_APP_API_URL ||
     "https://secret-island-30539.herokuapp.com/",
   headers: {
     authorization: getUserToken()
