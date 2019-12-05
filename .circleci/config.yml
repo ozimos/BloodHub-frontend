@@ -22,7 +22,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - ./codeclimate.jest.json
+            - .
 
   combine-coverage:
     executor: cypress/base-12-6-0
