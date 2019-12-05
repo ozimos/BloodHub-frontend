@@ -4,6 +4,7 @@
 # Cypress Examples
 cypress/integration/Examples
 cypress/videos
+cypress/screenshots
 
 # Storybook Examples
 src/stories

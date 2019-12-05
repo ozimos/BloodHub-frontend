@@ -1,18 +1,58 @@
 /// <reference types="Cypress" />
+import faker from 'faker'
+import schema from "../../app-schema.json";
+const user = {
+  id: faker.random.uuid(),
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  isDonor: true
+};
+const password = faker.internet.password(16)
+const street = faker.address.streetAddress()
+const lg = faker.address.county()
+const state = faker.address.state()
+const phone = faker.phone.phoneNumber()
 
 context("Actions", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000");
+    cy.server({ method: "POST", status: 201 });
+    cy.mockGraphql({
+      schema,
+      endpoint: Cypress.env("serverUrl")
+    }).as("mockGraphqlOps");
+    cy.mockGraphqlOps({
+      operations: {
+        getCurrentUser: {
+          getCurrentUser: null
+        }
+      }
+    });
+    cy.route("/sockjs-node", {});
+    cy.visit("/");
     cy.findByText(/Sign Up as a Donor/i).click();
   });
 
   it("signs up a donor successfully", () => {
+    const {firstName, lastName} = user
+    cy.mockGraphqlOps({
+      operations: {
+        userRegister: {
+          userRegister: {
+            user,
+            token: "Bearer sometoken"
+          }
+        },
+        getCurrentUser: {
+          getCurrentUser: null
+        }
+      }
+    });
     cy.findByLabelText(/First Name/i)
-      .type("Jane")
-      .should("have.value", "Jane");
+      .type(firstName)
+      .should("have.value", firstName);
     cy.findByLabelText(/Last Name/i)
-      .type("Doe")
-      .should("have.value", "Doe");
+      .type(lastName)
+      .should("have.value", lastName);
     cy.findByLabelText(/Email Address/i)
       .type("fake@email.com")
       .should("have.value", "fake@email.com");
@@ -20,53 +60,29 @@ context("Actions", () => {
     cy.focused().type("{downarrow}{downarrow}{enter}");
     cy.findByTestId("bloodGroup").should("have.value", "B_positive");
     cy.findByLabelText(/Street Address/i)
-      .type("1 Random Street")
-      .should("have.value", "1 Random Street");
+      .type(street)
+      .should("have.value", street);
     cy.findByLabelText(/Local Government/i)
-      .type("Local Government")
-      .should("have.value", "Local Government");
+      .type(lg)
+      .should("have.value", lg);
     cy.findByLabelText(/State/i)
-      .type("Lagos")
-      .should("have.value", "Lagos");
+      .type(state)
+      .should("have.value", state);
+    cy.findByLabelText(/Phone/i)
+      .type(phone)
+      .should("have.value", phone);
     cy.findByLabelText(/^Password/i)
-      .type("somepasswordofacceptablelength")
-      .should("have.value", "somepasswordofacceptablelength");
+      .type(password)
+      .should("have.value", password);
     cy.findByLabelText(/Verify Password/i)
-      .type("somepasswordofacceptablelength")
-      .should("have.value", "somepasswordofacceptablelength");
-
-    cy.server();
-    cy.route({
-      status: 201,
-      method: "POST",
-      url: "**/users/signup",
-      response: {
-        token: "some-valid-token",
-        user: {
-          username: "Jane Doe",
-          isDonor: true
-        }
-      }
-    }).as("donorSignup");
-    cy.route({
-      status: 200,
-      method: "GET",
-      url: "**/user",
-      response: {
-        currentUser: {
-          username: "Jane Doe",
-          isDonor: true
-        }
-      }
-    }).as("getUser");
+      .type(password)
+      .should("have.value", password);
 
     cy.findByText(/Proceed/i).click();
-    cy.wait("@donorSignup");
-    cy.wait("@getUser");
+    cy.wait(200);
     cy.location().should(location => {
       expect(location.pathname).to.eq("/dashboard");
-      expect(localStorage.getItem("token")).to.eq("some-valid-token");
-      expect(localStorage.getItem("loggedUser")).to.eq("Jane Doe");
+      expect(localStorage.getItem("token")).to.eq("Bearer sometoken");
     });
   });
 });

@@ -30,7 +30,7 @@ export const REGISTER_USER = gql`
 REGISTER_USER.toString = () => "userRegister";
 
 export const LOG_IN_USER = gql`
-  mutation userLogin($data: UserCreateInput!) {
+  mutation userLogin($data: UserLoginInput!) {
     userLogin(data: $data) {
       ...AuthFragment
     }
@@ -41,7 +41,7 @@ export const LOG_IN_USER = gql`
 LOG_IN_USER.toString = () => "userLogin";
 
 export const GET_CURRENT_USER = gql`
-  {
+  query getCurrentUser {
     isLoggedIn @client(always: true)
     getCurrentUser {
       ...AuthUserFragment
@@ -53,7 +53,7 @@ export const GET_CURRENT_USER = gql`
 GET_CURRENT_USER.toString = () => "getCurrentUser";
 
 export const IS_LOGGED_IN = gql`
-  {
+  query isLoggedIn {
     isLoggedIn @client(always: true)
   }
 `;

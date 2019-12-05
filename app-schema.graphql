@@ -1,0 +1,410 @@
+"""
+Direct the client to resolve this field locally, either from the cache or local resolvers.
+"""
+directive @client(
+  """
+  When true, the client will never use the cache for this value. See
+  https://www.apollographql.com/docs/react/essentials/local-state/#forcing-resolvers-with-clientalways-true
+  """
+  always: Boolean
+) on FIELD | FRAGMENT_DEFINITION | INLINE_FRAGMENT
+
+"""
+Export this locally resolved field as a variable to be used in the remainder of this query. See
+https://www.apollographql.com/docs/react/essentials/local-state/#using-client-fields-as-variables
+"""
+directive @export(
+  """The variable name to export this field as."""
+  as: String!
+) on FIELD
+
+"""
+Specify a custom store key for this result. See
+https://www.apollographql.com/docs/react/advanced/caching/#the-connection-directive
+"""
+directive @connection(
+  """Specify the store key."""
+  key: String!
+
+  """
+  An array of query argument names to include in the generated custom store key.
+  """
+  filter: [String!]
+) on FIELD
+
+enum BloodGroup {
+  A_positive
+  A_negative
+  B_positive
+  B_negative
+  AB_positive
+  AB_negative
+  O_positive
+  O_negative
+}
+
+type BloodRequest {
+  id: ID!
+  requester: User!
+  bloodGroup: BloodGroup!
+  hospital: Hospital!
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input BloodRequestCreateManyWithoutBloodRequestsInput {
+  create: [BloodRequestCreateWithoutRequesterInput!]
+  connect: [BloodRequestWhereUniqueInput!]
+}
+
+input BloodRequestCreateWithoutRequesterInput {
+  id: ID
+  bloodGroup: BloodGroup!
+  status: Status!
+  createdAt: DateTime
+  updatedAt: DateTime
+  hospital: HospitalCreateOneWithoutHospitalInput!
+}
+
+input BloodRequestScalarWhereInput {
+  id: StringFilter
+  bloodGroup: BloodGroup
+  status: Status
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+  AND: [BloodRequestScalarWhereInput!]
+  OR: [BloodRequestScalarWhereInput!]
+  NOT: [BloodRequestScalarWhereInput!]
+}
+
+input BloodRequestUpdateManyDataInput {
+  id: ID
+  bloodGroup: BloodGroup
+  status: Status
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input BloodRequestUpdateManyWithoutRequesterInput {
+  create: [BloodRequestCreateWithoutRequesterInput!]
+  connect: [BloodRequestWhereUniqueInput!]
+  set: [BloodRequestWhereUniqueInput!]
+  disconnect: [BloodRequestWhereUniqueInput!]
+  delete: [BloodRequestWhereUniqueInput!]
+  update: [BloodRequestUpdateWithWhereUniqueWithoutRequesterInput!]
+  updateMany: [BloodRequestUpdateManyWithWhereNestedInput!]
+  deleteMany: [BloodRequestScalarWhereInput!]
+  upsert: [BloodRequestUpsertWithWhereUniqueWithoutRequesterInput!]
+}
+
+input BloodRequestUpdateManyWithWhereNestedInput {
+  where: BloodRequestScalarWhereInput!
+  data: BloodRequestUpdateManyDataInput!
+}
+
+input BloodRequestUpdateWithoutRequesterDataInput {
+  id: ID
+  bloodGroup: BloodGroup
+  status: Status
+  createdAt: DateTime
+  updatedAt: DateTime
+  hospital: HospitalUpdateOneRequiredWithoutBloodRequestsInput
+}
+
+input BloodRequestUpdateWithWhereUniqueWithoutRequesterInput {
+  where: BloodRequestWhereUniqueInput!
+  data: BloodRequestUpdateWithoutRequesterDataInput!
+}
+
+input BloodRequestUpsertWithWhereUniqueWithoutRequesterInput {
+  where: BloodRequestWhereUniqueInput!
+  update: BloodRequestUpdateWithoutRequesterDataInput!
+  create: BloodRequestCreateWithoutRequesterInput!
+}
+
+input BloodRequestWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+input DateTimeFilter {
+  equals: DateTime
+  not: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+}
+
+type Donor {
+  id: ID!
+  user: User!
+  bloodGroup: BloodGroup!
+  document: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input DonorCreateInput {
+  id: ID
+  bloodGroup: BloodGroup!
+  document: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  user: UserCreateOneWithoutUserInput!
+}
+
+input DonorCreateOneWithoutDonorInput {
+  create: DonorCreateWithoutUserInput
+  connect: DonorWhereUniqueInput
+}
+
+input DonorCreateWithoutUserInput {
+  id: ID
+  bloodGroup: BloodGroup!
+  document: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input DonorUpdateInput {
+  id: ID
+  bloodGroup: BloodGroup
+  document: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  user: UserUpdateOneRequiredWithoutDonorInput
+}
+
+input DonorUpdateOneWithoutUserInput {
+  create: DonorCreateWithoutUserInput
+  connect: DonorWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: DonorUpdateWithoutUserDataInput
+  upsert: DonorUpsertWithoutUserInput
+}
+
+input DonorUpdateWithoutUserDataInput {
+  id: ID
+  bloodGroup: BloodGroup
+  document: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input DonorUpsertWithoutUserInput {
+  update: DonorUpdateWithoutUserDataInput!
+  create: DonorCreateWithoutUserInput!
+}
+
+input DonorWhereUniqueInput {
+  id: ID
+}
+
+type Hospital {
+  id: ID!
+  name: String!
+  street: String!
+  lg: String!
+  state: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input HospitalCreateOneWithoutHospitalInput {
+  create: HospitalCreateWithoutBloodRequestsInput
+  connect: HospitalWhereUniqueInput
+}
+
+input HospitalCreateWithoutBloodRequestsInput {
+  id: ID
+  name: String!
+  street: String!
+  lg: String!
+  state: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input HospitalUpdateOneRequiredWithoutBloodRequestsInput {
+  create: HospitalCreateWithoutBloodRequestsInput
+  connect: HospitalWhereUniqueInput
+  update: HospitalUpdateWithoutBloodRequestsDataInput
+  upsert: HospitalUpsertWithoutBloodRequestsInput
+}
+
+input HospitalUpdateWithoutBloodRequestsDataInput {
+  id: ID
+  name: String
+  street: String
+  lg: String
+  state: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input HospitalUpsertWithoutBloodRequestsInput {
+  update: HospitalUpdateWithoutBloodRequestsDataInput!
+  create: HospitalCreateWithoutBloodRequestsInput!
+}
+
+input HospitalWhereUniqueInput {
+  id: ID
+}
+
+type Mutation {
+  createOneUser(data: UserCreateInput!): User!
+  createOneDonor(data: DonorCreateInput!): Donor!
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateOneDonor(data: DonorUpdateInput!, where: DonorWhereUniqueInput!): Donor
+  userLogin(data: UserLoginInput): UserAuthPayload!
+  userRegister(data: UserCreateInput): UserAuthPayload!
+}
+
+type Query {
+  user(where: UserWhereUniqueInput!): User
+  donors(skip: Int, after: ID, before: ID, first: Int, last: Int): [Donor!]!
+  hospitals(skip: Int, after: ID, before: ID, first: Int, last: Int): [Hospital!]!
+  getCurrentUser: User
+  isLoggedIn: Boolean!
+}
+
+enum Status {
+  pending
+  matched
+  reprocessing
+  failed
+  success
+}
+
+input StringFilter {
+  equals: String
+  not: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+}
+
+type User {
+  password: String!
+  email: String!
+  id: ID!
+  firstName: String!
+  lastName: String
+  phone: String!
+  street: String
+  lg: String
+  state: String
+  donor: Donor
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isDonor: Boolean!
+}
+
+type UserAuthPayload {
+  user: User!
+  token: String!
+}
+
+input UserCreateInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  firstName: String!
+  lastName: String
+  email: String!
+  phone: String!
+  street: String
+  lg: String
+  state: String
+  password: String!
+  donor: DonorCreateOneWithoutDonorInput
+  bloodRequests: BloodRequestCreateManyWithoutBloodRequestsInput
+}
+
+input UserCreateOneWithoutUserInput {
+  create: UserCreateWithoutDonorInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutDonorInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  firstName: String!
+  lastName: String
+  email: String!
+  phone: String!
+  street: String
+  lg: String
+  state: String
+  password: String!
+  bloodRequests: BloodRequestCreateManyWithoutBloodRequestsInput
+}
+
+input UserLoginInput {
+  """Password"""
+  password: String!
+
+  """Email"""
+  email: String!
+}
+
+input UserUpdateInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+  street: String
+  lg: String
+  state: String
+  password: String
+  donor: DonorUpdateOneWithoutUserInput
+  bloodRequests: BloodRequestUpdateManyWithoutRequesterInput
+}
+
+input UserUpdateOneRequiredWithoutDonorInput {
+  create: UserCreateWithoutDonorInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutDonorDataInput
+  upsert: UserUpsertWithoutDonorInput
+}
+
+input UserUpdateWithoutDonorDataInput {
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+  street: String
+  lg: String
+  state: String
+  password: String
+  bloodRequests: BloodRequestUpdateManyWithoutRequesterInput
+}
+
+input UserUpsertWithoutDonorInput {
+  update: UserUpdateWithoutDonorDataInput!
+  create: UserCreateWithoutDonorInput!
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}

@@ -1,1 +1,5 @@
-{"video":false}
+{
+    "video": false,
+    "baseUrl": "http://localhost:3000",
+    "nodeVersion": "system"
+}
