@@ -1,22 +1,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { StylesProvider } from "@material-ui/core/styles";
-import { Provider } from "react-redux";
-import { configureStore } from "redux-starter-kit";
+import { ApolloProvider } from "@apollo/react-hooks";
+import ApolloClient from "apollo-boost";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { getUserToken } from "utils/auth";
+import { typeDefs, resolvers } from "apolloUtils/resolvers";
 
 import "./index.css";
-import reducer from "./reducers";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
-const store = configureStore({ reducer });
+const cache = new InMemoryCache();
+cache.writeData({
+  data: { user: { __typename: "User", isDonor: false, isLoggedIn: false } }
+});
+const client = new ApolloClient({
+  uri:
+    process.env.REACT_APP_API_URL ||
+    "https://secret-island-30539.herokuapp.com/",
+  headers: {
+    authorization: getUserToken()
+  },
+  resolvers,
+  typeDefs,
+  cache
+});
 
 const jsx = (
-  <Provider store={store}>
+  <ApolloProvider client={client}>
     <StylesProvider injectFirst>
       <App />
     </StylesProvider>
-  </Provider>
+  </ApolloProvider>
 );
 
 ReactDOM.render(jsx, document.getElementById("root"));

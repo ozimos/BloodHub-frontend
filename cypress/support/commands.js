@@ -9,6 +9,7 @@
 // ***********************************************
 //
 import '@testing-library/cypress/add-commands';
+import "@iam4x/cypress-graphql-mock";
 //
 // -- This is a parent command --
 // Cypress.Commands.add("login", (email, password) => { ... })

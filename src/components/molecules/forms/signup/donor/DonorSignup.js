@@ -9,7 +9,7 @@ import DonorFields, {
   donorInitialValues,
   donorValidationFields
 } from "./DonorFields";
-import { signup } from "actions/auth";
+import { REGISTER_USER } from "apolloUtils/requests";
 
 export const initialValues = { ...baseInitialValues, ...donorInitialValues };
 
@@ -20,10 +20,10 @@ export const validationSchema = object({
 
 export default () => (
   <AuthForm
-    action={signup}
     redirectPath="/dashboard"
     validationSchema={validationSchema}
     initialValues={initialValues}
+    authMutation={REGISTER_USER}
   >
     <BaseSignupForm>
       <DonorFields />

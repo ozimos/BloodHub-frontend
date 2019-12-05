@@ -1,6 +1,6 @@
 import { createAction } from "redux-starter-kit";
 import axios from "utils/axiosInstance";
-import authUtils from "utils/auth";
+import { saveUserToken } from "utils/auth";
 
 export const authenticateUser = createAction("AUTHENTICATE_USER", data => ({
   payload: data
@@ -26,7 +26,7 @@ export const getCurrentLoggedInUser = () => async dispatch => {
 export const login = formData => async dispatch => {
   try {
     const { data } = await axios.post("/users/login", formData);
-    authUtils.saveUserToken(data.token);
+    saveUserToken(data.token);
     dispatch(authenticateUser(data));
     await getCurrentLoggedInUser()(dispatch);
     return null;
@@ -43,7 +43,7 @@ export const login = formData => async dispatch => {
 export const signup = formData => async dispatch => {
   try {
     const { data } = await axios.post("/users/signup", formData);
-    authUtils.saveUserToken(data.token);
+    saveUserToken(data.token);
     dispatch(authenticateUser(data));
     await dispatch(getCurrentLoggedInUser());
     return null;
@@ -58,7 +58,7 @@ export const signup = formData => async dispatch => {
 export const requestBlood = formData => async dispatch => {
   try {
     const { data } = await axios.post("/requester", formData);
-    authUtils.saveUserToken(data.token);
+    saveUserToken(data.token);
     dispatch(authenticateUser(data));
     await getCurrentLoggedInUser()(dispatch);
     return null;
@@ -74,7 +74,7 @@ export const requestBlood = formData => async dispatch => {
 export const completeBloodRequest = formData => async dispatch => {
   try {
     const { data } = await axios.post("/requester", formData);
-    authUtils.saveUserToken(data.token);
+    saveUserToken(data.token);
     dispatch(authenticateUser(data));
     await getCurrentLoggedInUser()(dispatch);
     return null;

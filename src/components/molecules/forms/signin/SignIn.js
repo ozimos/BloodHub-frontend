@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import AuthForm from "../AuthForm";
 import SignInForm from "./SignInForm";
 import validationSchema, { initialValues } from "../signup/formSettings";
-import { login } from "../../../../actions/auth";
+import { LOG_IN_USER } from "apolloUtils/requests";
 
 export default function SignIn() {
   return (
@@ -12,8 +12,8 @@ export default function SignIn() {
         Sign In
       </Typography>
       <AuthForm
-        action={login}
         validationSchema={validationSchema}
+        authMutation={LOG_IN_USER}
         initialValues={initialValues}
       >
         <SignInForm />

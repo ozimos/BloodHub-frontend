@@ -1,26 +1,52 @@
 import React from "react";
 import { Formik } from "formik";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { GET_CURRENT_USER } from "apolloUtils/requests";
+import { saveUserToken } from "utils/auth";
+import { useHistory } from "react-router-dom";
 
-function AuthForm({
-  dispatch,
-  action,
+export default function AuthForm({
   initialValues,
   validationSchema,
+  authMutation,
   redirectPath,
-  isLoggedIn,
-  user,
   children
 }) {
-  const handleSubmit = async (values, { setSubmitting }) => {
-    await dispatch(action(values));
+  const history = useHistory();
+  const { data: userData } = useQuery(GET_CURRENT_USER);
+  const [authorizeUser] = useMutation(authMutation, {
+    update(
+      cache,
+      {
+        data: {
+          [authMutation]: { user, token }
+        }
+      }
+    ) {
+      cache.writeData({ data: { user, token } });
+      saveUserToken(token);
+    },
+    onCompleted() {
+      history.push(redirectPath);
+    }
+  });
+
+  const handleSubmit = async (
+    { bloodGroup, document, verifyPassword, ...values },
+    { setSubmitting }
+  ) => {
+    const data = bloodGroup
+      ? { donor: { create: { bloodGroup, document } }, ...values }
+      : values;
+    await authorizeUser({ variables: { data } });
     setSubmitting(false);
   };
-
-  const defaultRedirectPath = (user && user.isDonor) ? "/dashboard" : "/blood-request-details";
-
-  return isLoggedIn ? (
+  const defaultRedirectPath =
+    userData && userData.isLoggedIn && userData[GET_CURRENT_USER].isDonor
+      ? "/dashboard"
+      : "/blood-request-details";
+  return userData && userData.isLoggedIn ? (
     <Redirect to={redirectPath || defaultRedirectPath} />
   ) : (
     <Formik
@@ -32,10 +58,3 @@ function AuthForm({
     </Formik>
   );
 }
-
-const mapStateToProps = state => ({
-  user: state.auth.user,
-  isLoggedIn: state.auth.isLoggedIn
-});
-
-export default connect(mapStateToProps)(AuthForm);

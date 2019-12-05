@@ -1,20 +1,16 @@
 version: 2.1
-executors:
-  my-executor:
-    docker:
-      - image: cypress/base:12.6.0
 orbs:
   cypress: cypress-io/cypress@1.13.0
   snyk: snyk/snyk@0.0.8
 jobs:
   lint:
-    executor: my-executor
+    executor: cypress/base-12-6-0
     steps:
       - attach_workspace:
           at: ~/
       - run: yarn lint
   jest:
-    executor: my-executor
+    executor: cypress/base-12-6-0
     steps:
       - attach_workspace:
           at: ~/
@@ -29,7 +25,7 @@ jobs:
             - .
 
   combine-coverage:
-    executor: my-executor
+    executor: cypress/base-12-6-0
     steps:
       - attach_workspace:
           at: ~/
@@ -44,7 +40,7 @@ workflows:
   build:
     jobs:
       - cypress/install:
-          executor: my-executor
+          executor: cypress/base-12-6-0
           yarn: true
           post-install:
             - run:
@@ -65,7 +61,7 @@ workflows:
             - cypress/e2e
             - jest
       - cypress/run:
-          executor: my-executor
+          executor: cypress/base-12-6-0
           name: cypress/e2e
           yarn: true
           requires: 
