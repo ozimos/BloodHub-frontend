@@ -21,8 +21,8 @@ Snapshot Diff:
 +               aria-describedby="firstName-helper-text"
 +               aria-invalid="true"
 @@ --- --- @@
--                 style="width: 0px;"
-+                 style="width: 0.01px;"
+-                 class="PrivateNotchedOutline-legendLabelled-168 PrivateNotchedOutline-legendNotched-169"
++                 class="PrivateNotchedOutline-legendLabelled-168"
 @@ --- --- @@
 +           <p
 +             class="MuiFormHelperText-root MuiFormHelperText-contained Mui-error Mui-required"
