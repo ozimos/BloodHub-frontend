@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { Field } from "formik";
 import { string } from "yup";
 import { TextField } from "formik-material-ui";
 import Grid from "@material-ui/core/Grid";
@@ -81,20 +80,14 @@ export default function DonorFields() {
     <Fragment>
       {donorFields.map(field => (
         <Grid key={field.id} item xs={12}>
-          <Field
-            variant="outlined"
-            required
-            component={TextField}
-            fullWidth
-            {...field}
-          >
+          <TextField variant="outlined" required fullWidth {...field}>
             {field.select &&
               bloodGroups.map(group => (
                 <MenuItem key={group} value={group}>
                   {group}
                 </MenuItem>
               ))}
-          </Field>
+          </TextField>
         </Grid>
       ))}
     </Fragment>

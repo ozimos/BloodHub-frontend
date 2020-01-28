@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, Form } from "formik";
+import { Form } from "formik";
 import { TextField } from "formik-material-ui";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
@@ -61,7 +61,6 @@ const useStyles = makeStyles(theme => ({
 
 const fieldAttributes = {
   variant: "outlined",
-  component: TextField,
   required: true,
   fullWidth: true
 };
@@ -72,7 +71,7 @@ export default function BaseSignupForm({ children, isSubmitting }) {
     <Form className={classes.form} noValidate>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <Field
+          <TextField
             autoComplete="fname"
             name="firstName"
             id="firstName"
@@ -82,7 +81,7 @@ export default function BaseSignupForm({ children, isSubmitting }) {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Field
+          <TextField
             id="lastName"
             label="Last Name"
             name="lastName"
@@ -91,7 +90,7 @@ export default function BaseSignupForm({ children, isSubmitting }) {
           />
         </Grid>
         <Grid item xs={12}>
-          <Field
+          <TextField
             id="email"
             label="Email Address"
             type="email"
@@ -102,7 +101,7 @@ export default function BaseSignupForm({ children, isSubmitting }) {
         </Grid>
         {children}
         <Grid item xs={12}>
-          <Field
+          <TextField
             id="password"
             label="Password"
             type="password"
@@ -112,7 +111,7 @@ export default function BaseSignupForm({ children, isSubmitting }) {
           />
         </Grid>
         <Grid item xs={12}>
-          <Field
+          <TextField
             id="verifyPassword"
             label="Verify Password"
             type="password"
